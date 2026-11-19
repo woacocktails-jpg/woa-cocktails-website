@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Pic from './Pic.astro';
+import { areaPath, coverage, coverageLabels } from '../i18n/south-florida';
 import { localizePath } from '../i18n/utils';
 import type { Lang } from '../i18n/ui';
 import photo0 from '../assets/img/miami/hero.webp';
@@ -95,6 +96,18 @@ const gallery = [
       ))}
     </section>
 
+    <section class="wrap miami-section" id="areas-we-serve">
+      <h2 class="display h-md">{spanish ? 'Áreas de servicio del sur de Florida' : 'Areas We Serve in South Florida'}</h2>
+      <p>{spanish ? 'Explore nuestros servicios de barra móvil y bartenders desde Kendall hasta West Palm Beach.' : 'Explore mobile bars and bartending from Kendall to West Palm Beach.'}</p>
+      <div class="coverage">
+        {coverage.map((group, index) => (
+          <div>
+            <h3 class="display">{coverageLabels[lang][index]}</h3>
+            <ul>{group.map(area => <li><a href={L(areaPath(area.slug))}>{area.name}</a></li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </section>
     <section class="svp-cta">
       <div class="wrap">
         <h2 class="display">{spanish ? 'Cuéntenos sobre su evento en Miami' : 'Tell us about your Miami event'}</h2>
@@ -133,4 +146,12 @@ const gallery = [
     .miami-gallery figure:first-child {grid-column:1/-1}
     .miami-gallery figure:first-child :global(img) {aspect-ratio:4/3}
   }
+  #areas-we-serve {scroll-margin-top:96px}
+  #areas-we-serve p {margin-top:12px;color:var(--fg-dim)}
+  .coverage {display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:24px;margin-top:28px}
+  .coverage h3 {font-size:1.8rem;margin-bottom:10px}
+  .coverage ul {list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .coverage a {display:block;border:1px solid var(--line);padding:.65rem .9rem;color:var(--fg);text-decoration:none}
+  .coverage a:hover,.coverage a:focus-visible {border-color:var(--crimson-text)}
+  @media(max-width:760px) {.coverage {grid-template-columns:1fr}}
 </style>

@@ -1,0 +1,84 @@
+---
+import type { ImageMetadata } from 'astro';
+import Layout from '../layouts/Layout.astro';
+import Pic from './Pic.astro';
+import { areaPath, coverage, southFloridaAreas } from '../i18n/south-florida';
+import { localizePath } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+type Area = (typeof southFloridaAreas)[number];
+const { area, lang, variant } = Astro.props as { area: Area; lang: Lang; variant: number };
+const spanish = lang === 'es';
+const copy = area[lang];
+const title = spanish ? `Barras móviles y bartenders en ${area.name}` : `Mobile Bar & Bartending in ${area.name}`;
+const quote = spanish ? 'Solicite una cotización' : 'Request a Quote';
+const L = (path: string) => localizePath(path, lang);
+const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/img/miami/*.webp', { eager: true });
+const image = (name: string) => photos[`../assets/img/miami/${name}.webp`].default;
+const nearby = coverage.find(group => group.includes(area))?.filter(item => item !== area).slice(0, 3) ?? [];
+---
+
+<Layout lang={lang} title={`${title} | WOA Cocktails`} description={`${title}. ${copy.focus}`} styles={['woa-service.css']}>
+  <main class:list={['svc-page', 'area', `layout-${variant}`]}>
+    <section class="wrap area-hero">
+      <div>
+        <a class="link-arrow" href={L('/miami#areas-we-serve')}>{spanish ? 'Áreas de servicio del sur de Florida' : 'South Florida service areas'}</a>
+        <h1 class="display h-lg">{title}</h1>
+        <p>{copy.focus}</p>
+        <a class="btn btn-solid" href={L('/contact#inquiry-form')}>{quote}</a>
+        <p>{spanish ? 'El anfitrión proporciona el alcohol. Certificado de seguro disponible a solicitud.' : 'The host provides the alcohol. Certificate of insurance available on request.'}</p>
+      </div>
+      <figure>
+        <Pic src={image(area.photos[0])} alt={spanish ? 'Ejemplo de servicio de barra de WOA' : 'Example of WOA event bar service'} kind="hero" priority />
+        <figcaption>{spanish ? 'De nuestro portafolio del sur de Florida' : 'From our South Florida event portfolio'}</figcaption>
+      </figure>
+    </section>
+    <section class="wrap area-details">
+      <figure>
+        <Pic src={image(area.photos[1])} alt={spanish ? 'Detalle de un evento de WOA' : 'A detail from a WOA event'} kind="half" />
+      </figure>
+      <div>
+        <h2 class="display h-md">{spanish ? `Planifique su evento en ${area.name}` : `Plan your event in ${area.name}`}</h2>
+        <p>{copy.planning}</p>
+        <h3 class="display">{spanish ? 'Servicios disponibles' : 'Services you can book'}</h3>
+        <ul>
+          <li><a class="link-arrow" href={L('/staffing')}>{spanish ? 'Bartenders y personal' : 'Bartending & Staffing'}</a></li>
+          <li><a class="link-arrow" href={L('/mobile-bar')}>{spanish ? 'Barra móvil con servicio completo' : 'Full-Service Mobile Bar'}</a></li>
+          <li><a class="link-arrow" href={L('/bar-rentals')}>{spanish ? 'Renta de barras' : 'Bar Rentals'}</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="svp-cta">
+      <div class="wrap">
+        <h2 class="display">{spanish ? `Cuéntenos sobre su evento en ${area.name}` : `Tell us about your ${area.name} event`}</h2>
+        <p>{spanish ? 'Comparta la fecha, el lugar, el número de invitados y el servicio que necesita.' : 'Share your date, venue, guest count, and the service you need.'}</p>
+        <a class="btn btn-solid" href={L('/contact#inquiry-form')}>{quote}</a>
+      </div>
+    </section>
+    <nav class="wrap area-nearby" aria-label={spanish ? 'Otras áreas de servicio' : 'Other service areas'}>
+      {nearby.map(item => <a class="link-arrow" href={L(areaPath(item.slug))}>{item.name}</a>)}
+    </nav>
+  </main>
+</Layout>
+
+<style>
+  .area-hero,.area-details {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,6vw,90px);align-items:center;padding-block:clamp(40px,7vw,100px)}
+  .area h1 {font-size:clamp(42px,5.6vw,86px);margin:20px 0}
+  .area h3 {font-size:1.8rem;margin-top:20px}
+  .area p {color:var(--fg-dim);line-height:1.65;margin:14px 0}
+  .area figure {margin:0;min-width:0}
+  .area figcaption {font-size:.875rem;color:var(--fg-dim);margin-top:8px}
+  .area figure :global(img) {display:block;width:100%;height:clamp(320px,43vw,580px);object-fit:cover;object-position:center 55%}
+  .area-details figure :global(img) {height:clamp(300px,38vw,500px)}
+  .area ul {padding-inline-start:20px}
+  .area li {margin-top:8px}
+  .layout-1 .area-hero figure,.layout-2 .area-details figure {order:-1}
+  .layout-2 .area-hero {grid-template-columns:minmax(0,2fr) minmax(0,3fr)}
+  .layout-0 .area-details figure,.layout-1 .area-details figure {order:1}
+  .area-nearby {display:flex;flex-wrap:wrap;gap:20px;padding-block:28px}
+  @media(max-width:760px) {
+    .area-hero,.area-details,.layout-2 .area-hero {grid-template-columns:1fr}
+    .layout-1 .area-hero figure,.layout-2 .area-details figure,.area-details figure {order:1}
+    .area figure :global(img) {height:clamp(260px,76vw,420px)}
+  }
+</style>
