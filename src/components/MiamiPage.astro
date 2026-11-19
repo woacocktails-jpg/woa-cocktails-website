@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Pic from './Pic.astro';
+import { localizePath } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+import photo0 from '../assets/img/miami/hero.webp';
+import photo1 from '../assets/img/miami/rentals.webp';
+import photo2 from '../assets/img/miami/staffing.webp';
+import photo3 from '../assets/img/miami/full-service.webp';
+import photo4 from '../assets/img/miami/mojito.webp';
+import photo5 from '../assets/img/miami/coconut.webp';
+import photo6 from '../assets/img/miami/coconut-service.webp';
+import photo7 from '../assets/img/miami/outdoor-event.webp';
+import photo8 from '../assets/img/miami/custom-cocktail.webp';
+import photo9 from '../assets/img/miami/mint-cocktail.webp';
+import photo10 from '../assets/img/miami/cocktail-menu.webp';
+import photo11 from '../assets/img/miami/wine-service.webp';
+import photo12 from '../assets/img/miami/flow-event.webp';
+import photo13 from '../assets/img/miami/drink-service.webp';
+
+const { lang } = Astro.props as { lang: Lang };
+const spanish = lang === 'es';
+const L = (path: string) => localizePath(path, lang);
+const quote = spanish ? 'Solicite una cotización' : 'Request a Quote';
+const description = spanish
+  ? 'Barras móviles y bartenders profesionales para bodas, eventos corporativos y fiestas privadas en Miami y Miami Beach.'
+  : 'Book mobile bars and professional bartenders for weddings, corporate events, and private parties in Miami and Miami Beach.';
+const services = [
+  { path: '/bar-rentals', image: photo1, title: spanish ? 'Renta de barras' : 'Bar Rentals',
+    detail: spanish ? 'Barras portátiles para eventos en Miami, con opciones de entrega y montaje.' : 'Rent a portable bar for your Miami event, with delivery and setup options.' },
+  { path: '/staffing', image: photo2, title: spanish ? 'Bartenders y personal' : 'Bartending & Staffing',
+    detail: spanish ? 'Bartenders y personal de servicio para su evento en Miami.' : 'Professional bartenders and event staff for your Miami event.' },
+  { path: '/mobile-bar', image: photo3, title: spanish ? 'Barra móvil con servicio completo' : 'Full-Service Mobile Bar',
+    detail: spanish ? 'Montaje de barra, cócteles a medida, opciones sin alcohol y servicio profesional. El cliente proporciona el alcohol.' : 'Bar setup, custom cocktails, zero-proof options, and professional service. You provide the alcohol.' },
+  { path: 'https://sites.google.com/view/miami-mojito-cart/home', image: photo4, title: spanish ? 'Carrito de mojitos' : 'Mojito Cart',
+    detail: spanish ? 'Mojitos preparados al momento con menta fresca y opciones sin alcohol.' : 'Fresh mint mojitos made to order, with zero-proof options.' },
+];
+const gallery = [
+  { title: spanish ? 'Invitados y eventos al aire libre' : 'Guests & Outdoor Events', photos: [{ image: photo5, alt: spanish ? 'Mujer con un cóctel en un coco con el logotipo de WOA' : 'Woman holding a coconut cocktail with the WOA logo visible' }, { image: photo6, alt: spanish ? 'Invitados recibiendo un cóctel servido en un coco' : 'Guests receiving a drink served in a coconut' }, { image: photo7, alt: spanish ? 'Invitados celebrando al aire libre' : 'Guests celebrating outdoors' }] },
+  { title: spanish ? 'Cócteles y detalles de barra' : 'Cocktails & Bar Details', photos: [{ image: photo8, alt: spanish ? 'Cóctel y menú de Ligne Roset' : 'Custom cocktail and menu for Ligne Roset' }, { image: photo9, alt: spanish ? 'Cóctel con menta junto a un menú' : 'Mint-garnished drink beside a menu' }, { image: photo10, alt: spanish ? 'Cócteles de colores en la barra' : 'Colorful cocktails lined up on the bar' }] },
+  { title: spanish ? 'Servicio y activaciones' : 'Event Service & Activations', photos: [{ image: photo11, alt: spanish ? 'Bartender en una estación de vinos al aire libre' : 'Bartender beside an outdoor wine station' }, { image: photo12, alt: spanish ? 'Invitada con un cóctel sin alcohol de color rosa' : 'Guest holding a pink mocktail' }, { image: photo13, alt: spanish ? 'Bartender sirviendo una bebida verde' : 'Bartender serving a green drink' }] },
+];
+---
+
+<Layout lang={lang} title={spanish ? 'Barras móviles y bartenders en Miami | WOA Cocktails' : 'Mobile Bars & Bartenders in Miami | WOA Cocktails'} description={description} styles={['woa-service.css']}>
+  <main class="svc-page">
+    <section class="miami-hero">
+      <div class="miami-intro">
+        <p class="eyebrow">WOA Cocktails</p>
+        <h1 class="display h-lg">{spanish ? 'Barras y bartenders en ' : 'Mobile Bars & Bartenders in '}<em>Miami</em></h1>
+        <p>{description}</p>
+        <a class="btn btn-solid" href={L('/contact#inquiry-form')}>{quote}</a>
+      </div>
+      <Pic src={photo0} alt={spanish ? 'Dos bartenders de WOA detrás de la barra de siete pies' : 'Two WOA bartenders behind the seven-foot bar'} kind="hero" priority />
+    </section>
+
+    <section class="wrap miami-section">
+      <h2 class="display h-md">{spanish ? 'Servicios en Miami' : 'What You Can Book in Miami'}</h2>
+      <div class="miami-services">
+        {services.map(service => (
+          <a class="svc-card" href={service.path.startsWith('/') ? L(service.path) : service.path}>
+            <div class="svc-thumb"><Pic src={service.image} alt="" kind="card" /></div>
+            <div class="svc-body">
+              <h3 class="svc-title">{service.title}</h3>
+              <p class="svc-desc">{service.detail}</p>
+              <span class="link-arrow">{spanish ? 'Ver servicio' : 'Explore service'}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap miami-section">
+      <h2 class="display h-md">{spanish ? 'WOA en acción' : 'WOA in Action'}</h2>
+      <article class="miami-feature">
+        <video controls playsinline preload="none" poster="/video/miami-event-poster.jpg" aria-label={spanish ? 'Resumen de un evento de WOA' : 'WOA Cocktails event recap'}>
+          <source src="/video/miami-event-recap.mp4" type="video/mp4" />
+        </video>
+        <div>
+          <h3 class="display h-md">{spanish ? 'Bodas, recepciones y activaciones de marca' : 'Weddings, receptions, and brand activations'}</h3>
+          <p>{spanish ? 'De Brickell a Miami Beach y Coral Gables, adaptamos el montaje de barra, el menú y el servicio al espacio de su evento.' : 'From Brickell to Miami Beach and Coral Gables, we tailor the bar setup, drink menu, and staffing to your venue.'}</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="wrap miami-section">
+      <h2 class="display h-md">{spanish ? 'Galería de eventos' : 'Event Gallery'}</h2>
+      {gallery.map(group => (
+        <div class="miami-gallery-group">
+          <h3 class="display">{group.title}</h3>
+          <div class="miami-gallery">
+            {group.photos.map(photo => <figure><Pic src={photo.image} alt={photo.alt} kind="card" /></figure>)}
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <section class="svp-cta">
+      <div class="wrap">
+        <h2 class="display">{spanish ? 'Cuéntenos sobre su evento en Miami' : 'Tell us about your Miami event'}</h2>
+        <p>{spanish ? 'Comparta la fecha, el lugar y el número de invitados.' : 'Send us the date, venue, and guest count so we can put together a quote.'}</p>
+        <a class="btn btn-solid" href={L('/contact#inquiry-form')}>{quote}</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .miami-hero {display:grid;grid-template-columns:1fr 1fr;align-items:stretch;border-bottom:1px solid var(--line)}
+  .miami-intro {align-self:center;padding:clamp(96px,12vw,160px) clamp(24px,5vw,80px) 48px}
+  .miami-intro h1 {font-size:clamp(44px,6vw,94px);margin:14px 0}
+  .miami-intro em {color:var(--crimson-text)}
+  .miami-intro p:not(.eyebrow), .miami-feature p:not(.eyebrow) {color:var(--fg-dim);line-height:1.7;margin:18px 0 26px}
+  .miami-hero :global(picture) {display:block;min-height:0}
+  .miami-hero :global(img) {width:100%;height:100%;max-height:760px;object-fit:cover;object-position:center 52%;display:block}
+  .miami-section {padding-block:clamp(50px,8vw,110px)}
+  .miami-services {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+  .miami-feature {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(22px,5vw,80px);padding-block:38px;border-bottom:1px solid var(--line)}
+  .miami-services .svc-card:nth-child(1) :global(img) {object-position:center 62%}
+  .miami-services .svc-card:nth-child(3) :global(img) {object-position:center 52%}
+  .miami-feature video {display:block;width:100%;height:clamp(360px,55vw,600px);object-fit:contain;background:#111}
+  .miami-gallery-group {margin-top:clamp(26px,5vw,52px)}
+  .miami-gallery-group h3 {font-size:clamp(26px,4vw,39px);margin:0 0 12px}
+  .miami-gallery {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .miami-gallery figure {margin:0;min-width:0}
+  .miami-gallery :global(img) {display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+  .miami-gallery-group:first-of-type .miami-gallery :global(img) {aspect-ratio:1/1}
+  @media(max-width:760px) {
+    .miami-hero,.miami-services,.miami-feature {grid-template-columns:1fr}
+    .miami-hero :global(img) {height:auto;max-height:none;aspect-ratio:4/5;object-position:center 53%}
+    .miami-feature video {height:min(120vw,540px)}
+    .miami-gallery {grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .miami-gallery figure:first-child {grid-column:1/-1}
+    .miami-gallery figure:first-child :global(img) {aspect-ratio:4/3}
+  }
+</style>
