@@ -4,7 +4,8 @@
 // Prices come from src/i18n/pricing.ts via bar-rentals-copy.ts.
 import Pic from './Pic.astro';
 import { barRentalsCopy } from '../i18n/bar-rentals-copy';
-import { PRICING } from '../i18n/pricing';
+import { nycBarRentalsCopy } from '../i18n/bar-rentals-nyc-copy';
+import { NYC_RENTAL_PRICES, PRICING } from '../i18n/pricing';
 import { localizePath } from '../i18n/utils';
 import type { Lang } from '../i18n/ui';
 import heroBar from '../assets/img/ev-grandopening-woabar.webp';
@@ -13,22 +14,35 @@ import shotTeam from '../assets/img/ev-opening-team.webp';
 import shotActivation from '../assets/img/ev-activation-mocktails.jpg';
 import ctaBg from '../assets/img/ev-opening-champagne.jpg';
 
+import nycHero from '../assets/img/nyc-rental-skyline.jpg';
+import nycLong from '../assets/img/nyc-rental-long-white.jpg';
+import nycVenue from '../assets/img/nyc-rental-venue.jpg';
+import nycCompactCurved from '../assets/img/nyc-rental-compact-curved.jpg';
+import nycWideWood from '../assets/img/nyc-rental-wide-wood.jpg';
+import nycCompactWood from '../assets/img/nyc-rental-compact-wood.jpg';
+import nycCurved from '../assets/img/nyc-rental-curved-white.jpg';
+import nycEvent from '../assets/img/nyc-rental-event.jpg';
+
 export interface Props {
   lang: Lang;
+  market?: 'nyc' | 'miami';
 }
 
-const { lang } = Astro.props;
-const c = barRentalsCopy(lang);
+const { lang, market = 'miami' } = Astro.props;
+const isNyc = market === 'nyc';
+const c = isNyc ? nycBarRentalsCopy(lang) : barRentalsCopy(lang);
 const L = (path: string) => localizePath(path, lang);
 const rentals = PRICING.rentals;
-const shots = [shotDuo, shotTeam, shotActivation];
+const shots = isNyc
+  ? [nycLong, nycVenue, nycCompactCurved, nycWideWood, nycCompactWood, nycCurved, nycEvent]
+  : [shotDuo, shotTeam, shotActivation];
 ---
 
-<main class="svc-page br-page">
+<main class:list={['svc-page br-page', { 'br-nyc': isNyc }]}>
   {/* ── Hero ── */}
   <section class="svp-hero">
     <div class="svp-hero-bg">
-      <Pic src={heroBar} alt={c.hero.bgAlt} kind="hero" priority />
+      <Pic src={isNyc ? nycHero : heroBar} alt={c.hero.bgAlt} kind="hero" priority />
     </div>
     <div class="wrap svp-hero-content">
       <div class="svp-hero-top">
@@ -45,16 +59,22 @@ const shots = [shotDuo, shotTeam, shotActivation];
           <p class="br-lede">{c.hero.lede}</p>
 
           {/* Price, straight off the rate card. */}
-          <div class="br-price">
+          {isNyc ? (
+            <div class="br-nyc-prices">
+              <span>{lang === 'en' ? '4-foot bar' : 'Barra de 4 pies'} <strong>{NYC_RENTAL_PRICES.fourFoot}</strong></span>
+              <span>{lang === 'en' ? '16-foot bar' : 'Barra de 16 pies'} <strong>{NYC_RENTAL_PRICES.sixteenFoot}</strong></span>
+            </div>
+          ) : <div class="br-price">
             <span class="lbl">{c.hero.priceLabel}</span>
             <b>{rentals.amount} <span class="to">{rentals.unit?.[lang]}</span></b>
-          </div>
+          </div>}
 
           <div class="br-hero-cta">
             <a href={L('/contact')} class="btn btn-solid">
               {c.hero.ctaPrimary} <span class="arr">→</span>
             </a>
-            <a href={L('/pricing')} class="btn btn-ghost">{c.hero.ctaSecondary}</a>
+            {!isNyc && <a href={L('/bar-rentals-nyc')} class="btn btn-ghost">{lang === 'en' ? 'Bar rentals in NYC' : 'Renta de barras en Nueva York'}</a>}
+            {!isNyc && <a href={L('/pricing')} class="btn btn-ghost">{c.hero.ctaSecondary}</a>}
           </div>
         </div>
         <aside class="svp-hero-aside">{c.hero.aside}</aside>
@@ -185,7 +205,7 @@ const shots = [shotDuo, shotTeam, shotActivation];
       <p>{c.cta.body}</p>
       <div class="cta-row">
         <a href={L('/contact')} class="btn btn-solid">{c.cta.primary} <span class="arr">→</span></a>
-        <a href={L('/pricing')} class="btn btn-ghost">{c.cta.secondary}</a>
+        {!isNyc && <a href={L('/pricing')} class="btn btn-ghost">{c.cta.secondary}</a>}
       </div>
     </div>
   </section>

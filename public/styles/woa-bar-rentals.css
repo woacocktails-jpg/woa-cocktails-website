@@ -48,3 +48,20 @@
   .br-price .to{font-size:26px}
   .br-hero-cta .btn{justify-content:center;min-height:50px;width:100%}
 }
+
+.br-nyc .svp-hero-bg img{object-position:center 74%}
+.br-nyc-prices{display:flex;flex-wrap:wrap;gap:12px 28px;margin:24px 0;color:#fff}
+.br-nyc-prices span{display:flex;gap:10px;align-items:baseline}
+.br-nyc-prices strong{font-size:1.35em}
+.br-nyc .br-shot img{height:auto;object-fit:contain;aspect-ratio:4/3;background:#f6f4f0}
+@media(min-width:900px){
+  .br-nyc .svp-hero-bg img{width:54%;margin-left:auto;object-position:center 72%}
+}
+.br-nyc .svp-hero-content{padding-inline:clamp(24px, 4vw, 64px)}
+.br-nyc .svp-hero-body{grid-template-columns:minmax(0,1fr);gap:20px}
+.br-nyc .svp-hero h1{font-size:clamp(44px, 5.4vw, 80px)}
+.br-nyc .svp-hero h1 em{overflow-wrap:anywhere}
+.br-nyc .svp-hero-aside{max-width:40ch}
+@media(min-width:900px){
+  .br-nyc .svp-hero-body{width:43%;padding-top:clamp(32px, 5vh, 64px)}
+}
