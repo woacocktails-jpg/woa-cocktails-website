@@ -1,0 +1,7 @@
+---
+import SouthFloridaArea from '../../components/SouthFloridaArea.astro';
+import { areaRoutes } from '../../i18n/south-florida';
+
+export const getStaticPaths = () => areaRoutes('en');
+---
+<SouthFloridaArea {...Astro.props} />
