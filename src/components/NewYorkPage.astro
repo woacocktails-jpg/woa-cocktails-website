@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Pic from './Pic.astro';
+import { localizePath } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+import rooftop from '../assets/img/new-york-rooftop-team.webp';
+import bar from '../assets/img/new-york-full-bar.webp';
+import cocktails from '../assets/img/new-york-cocktails.webp';
+import mocktails from '../assets/img/new-york-mocktail-service.webp';
+import residential from '../assets/img/new-york-residential.webp';
+
+const { lang } = Astro.props as { lang: Lang };
+const spanish = lang === 'es';
+const L = (path: string) => localizePath(path, lang);
+const quote = spanish ? 'Solicite una cotización' : 'Request a Quote';
+const description = spanish
+  ? 'Barras móviles, renta de barras y bartenders para bodas, recepciones y eventos corporativos en Nueva York.'
+  : 'Book mobile bars, bar rentals, and professional bartenders for weddings, private receptions, and corporate events in New York City.';
+const services = [
+  { path: '/bar-rentals-nyc', image: bar, title: spanish ? 'Renta de barras' : 'Bar Rentals',
+    detail: spanish ? 'Barras portátiles de 4 a 16 pies, con opciones de entrega y montaje.' : 'Portable bars from 4 to 16 feet, with delivery and setup options.' },
+  { path: '/staffing', image: cocktails, title: spanish ? 'Bartenders y personal' : 'Bartending & Staffing',
+    detail: spanish ? 'Bartenders y equipo de servicio para su evento.' : 'Professional bartenders and event staff for your venue and service plan.' },
+  { path: '/mobile-bar', image: mocktails, title: spanish ? 'Barra móvil con servicio completo' : 'Full-Service Mobile Bar',
+    detail: spanish ? 'Montaje, cócteles y bebidas sin alcohol con un equipo de servicio.' : 'A complete bar setup with a custom cocktail and zero-proof menu and a dedicated team.' },
+];
+---
+
+<Layout lang={lang} title={spanish ? 'Barras móviles y bartenders en Nueva York | WOA Cocktails' : 'Mobile Bars & Bartenders in NYC | WOA Cocktails'} description={description} styles={['woa-service.css']}>
+  <main class="svc-page">
+    <section class="nyc-hero">
+      <div class="nyc-intro">
+        <p class="eyebrow">WOA Cocktails</p>
+        <h1 class="display h-lg">{spanish ? 'Barras y bartenders en ' : 'Mobile Bars & Bartenders in '}<em>{spanish ? 'Nueva York' : 'New York City'}</em></h1>
+        <p>{description}</p>
+        <a class="btn btn-solid" href={L('/contact#inquiry-form')}>{quote} <span class="arr">→</span></a>
+      </div>
+      <Pic src={rooftop} alt={spanish ? 'Equipo de WOA trabajando en una terraza de Manhattan' : 'WOA bartenders working at a rooftop bar overlooking Manhattan'} kind="hero" priority />
+    </section>
+
+    <section class="wrap nyc-section">
+      <h2 class="display h-md">{spanish ? 'Servicios en Nueva York' : 'What You Can Book in NYC'}</h2>
+      <div class="nyc-services">
+        {services.map(service => (
+          <a class="svc-card" href={L(service.path)}>
+            <div class="svc-thumb"><Pic src={service.image} alt="" kind="card" /></div>
+            <div class="svc-body">
+              <h3 class="svc-title">{service.title}</h3>
+              <p class="svc-desc">{service.detail}</p>
+              <span class="link-arrow">{spanish ? 'Ver servicio' : 'Explore service'} →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap nyc-section">
+      <h2 class="display h-md">{spanish ? 'Eventos en Nueva York' : 'Featured NYC Events'}</h2>
+      <article class="nyc-feature">
+        <video controls playsinline preload="none" poster={mocktails.src} aria-label={spanish ? 'Resumen del evento Fujifilm' : 'Fujifilm event recap'}>
+          <source src="/video/fujifilm-nyc-recap.mp4" type="video/mp4" />
+          <a href="/video/fujifilm-nyc-recap.mp4">{spanish ? 'Ver video' : 'Watch the recap'}</a>
+        </video>
+        <div>
+          <p class="eyebrow">Fujifilm</p>
+          <h3 class="display h-md">{spanish ? 'Cuatro espacios. Cuatro conceptos de barra. Un evento.' : 'Four venues. Four bar concepts. One event.'}</h3>
+          <p>{spanish ? 'WOA coordinó cuatro conceptos de barra que operaron al mismo tiempo en cuatro espacios de Nueva York.' : 'WOA ran four distinct bar concepts simultaneously across four New York venues.'}</p>
+          <a class="link-arrow" href={L('/brand-experiences')}>{spanish ? 'Experiencias de marca' : 'Explore Brand Experiences'} →</a>
+        </div>
+      </article>
+      <article class="nyc-feature">
+        <Pic src={residential} alt={spanish ? 'Bartender preparando un cóctel en One High Line' : 'Bartender shaking a cocktail at One High Line'} kind="half" />
+        <div>
+          <p class="eyebrow">One High Line</p>
+          <h3 class="display h-md">{spanish ? 'Recepción privada en Manhattan' : 'A private reception in Manhattan'}</h3>
+          <p>{spanish ? 'WOA montó la barra, preparó un menú de cócteles y bebidas sin alcohol y atendió la recepción.' : 'WOA brought the bar, created a cocktail and zero-proof menu, and staffed the reception.'}</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="svp-cta">
+      <div class="wrap">
+        <h2 class="display">{spanish ? 'Cuéntenos sobre su evento' : 'Tell us about your New York event'}</h2>
+        <p>{spanish ? 'Comparta la fecha, el lugar y el número de invitados.' : 'Send us the date, venue, and guest count so we can put together a quote.'}</p>
+        <a class="btn btn-solid" href={L('/contact#inquiry-form')}>{quote} <span class="arr">→</span></a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .nyc-hero {display:grid;grid-template-columns:1fr 1fr;align-items:stretch;border-bottom:1px solid var(--line)}
+  .nyc-intro {align-self:center;padding:clamp(96px,12vw,160px) clamp(24px,5vw,80px) 48px}
+  .nyc-intro h1 {font-size:clamp(44px,6vw,94px);margin:14px 0}
+  .nyc-intro em {color:var(--crimson-text)}
+  .nyc-intro p:not(.eyebrow), .nyc-feature p:not(.eyebrow) {color:var(--fg-dim);line-height:1.7;margin:18px 0 26px}
+  .nyc-hero :global(picture) {display:block;min-height:0}
+  .nyc-hero :global(img) {width:100%;height:100%;max-height:760px;object-fit:cover;object-position:center 68%;display:block}
+  .nyc-section {padding-block:clamp(50px,8vw,110px)}
+  .nyc-services {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:28px;background:var(--line)}
+  .nyc-feature {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(22px,5vw,80px);padding-block:38px;border-bottom:1px solid var(--line)}
+  .nyc-feature video, .nyc-feature :global(img) {display:block;width:100%;height:clamp(290px,45vw,520px)}
+  .nyc-feature video {object-fit:contain;background:#111}
+  .nyc-feature :global(img) {object-fit:cover;object-position:center 58%}
+  @media(max-width:760px) {
+    .nyc-hero,.nyc-services,.nyc-feature {grid-template-columns:1fr}
+    .nyc-hero :global(img) {height:360px;object-position:center 75%}
+  }
+</style>

@@ -106,6 +106,7 @@ const graph: Record<string, unknown>[] = [
 // Localized so /es pages emit Spanish trails.
 const base = stripLocale(Astro.url.pathname).replace(/\/$/, '') || '/';
 const routeLabel: Record<string, Record<Lang, string>> = {
+  '/new-york': { en: 'New York', es: 'Nueva York' },
   '/mobile-bar': { en: 'Mobile Bar for Events', es: 'Barra móvil para eventos' },
   '/brand-experiences': { en: 'Brand & Hospitality Experiences', es: 'Experiencias de marca y hospitalidad' },
   '/staffing': { en: 'Bartending & Hospitality Staffing', es: 'Personal de bar y hospitalidad' },
