@@ -28,6 +28,9 @@ const DIST = join(ROOT, 'dist');
 // The confirmed public figures (mirrors AMOUNT in src/i18n/pricing.ts).
 const ALLOWED = ['$275', '$850', '$55', '$125', '$650'];
 // Files allowed to contain a literal dollar figure.
+const NYC_RENTAL_ONLY = '$950';
+// This size-specific rate is published on the NYC rental pages.
+const NYC_RENTAL_PAGE = /^dist\/(?:es\/)?bar-rentals-nyc\/index\.html$/;
 const SOURCE_ALLOWLIST = ['src/i18n/pricing.ts'];
 
 const FIGURE = /\$\s?\d{1,3}(?:,\d{3})*(?:\.\d{2})?/g;
@@ -80,6 +83,7 @@ for (const file of htmlFiles) {
   const hits = visible.match(FIGURE) || [];
   for (const hit of hits) {
     const norm = hit.replace(/\s/g, '');
+    if (norm === NYC_RENTAL_ONLY && NYC_RENTAL_PAGE.test(rel)) continue;
     if (!ALLOWED.includes(norm)) {
       errors.push(`${rel}  unexpected price in built output: ${hit}`);
       continue;

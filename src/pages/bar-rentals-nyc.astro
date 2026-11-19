@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BarRentalsPage from '../components/BarRentalsPage.astro';
+import { nycBarRentalsCopy } from '../i18n/bar-rentals-nyc-copy';
+
+const c = nycBarRentalsCopy('en');
+---
+
+<Layout lang="en" title={c.meta.title} description={c.meta.description} styles={['woa-service.css', 'woa-bar-rentals.css']}>
+  <BarRentalsPage lang="en" market="nyc" />
+</Layout>

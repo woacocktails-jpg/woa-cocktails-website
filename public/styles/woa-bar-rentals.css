@@ -48,3 +48,12 @@
   .br-price .to{font-size:26px}
   .br-hero-cta .btn{justify-content:center;min-height:50px;width:100%}
 }
+
+.br-nyc .svp-hero-bg img{object-position:center 74%}
+.br-nyc-prices{display:flex;flex-wrap:wrap;gap:12px 28px;margin:24px 0;color:#fff}
+.br-nyc-prices span{display:flex;gap:10px;align-items:baseline}
+.br-nyc-prices strong{font-size:1.35em}
+.br-nyc .br-shot img{height:auto;object-fit:contain;aspect-ratio:4/3;background:#f6f4f0}
+@media(min-width:900px){
+  .br-nyc .svp-hero-bg img{width:54%;margin-left:auto;object-position:center 72%}
+}

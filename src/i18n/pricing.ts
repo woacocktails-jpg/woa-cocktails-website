@@ -25,6 +25,11 @@ const AMOUNT = {
   rentalsTo: '$650',
 } as const;
 
+export const NYC_RENTAL_PRICES = {
+  fourFoot: '$275',
+  sixteenFoot: '$950',
+} as const;
+
 /** Mixology classes book from this many participants. */
 export const CLASS_MIN = 12;
 
