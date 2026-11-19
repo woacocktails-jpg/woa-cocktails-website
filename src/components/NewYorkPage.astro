@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Pic from './Pic.astro';
+import { newYorkCoverage, nyAreaPath } from '../i18n/new-york-areas';
 import { localizePath } from '../i18n/utils';
 import type { Lang } from '../i18n/ui';
 import rooftop from '../assets/img/new-york-rooftop-team.webp';
@@ -78,6 +79,18 @@ const services = [
       </article>
     </section>
 
+    <section class="wrap nyc-section" id="areas-we-serve">
+      <h2 class="display h-md">{spanish ? 'Áreas de servicio de Nueva York y alrededores' : 'New York & Nearby Service Areas'}</h2>
+      <div class="nyc-coverage">
+        {newYorkCoverage.map(group => (
+          <div>
+            <h3 class="display">{group.title[lang]}</h3>
+            <ul>{group.areas.map(area => <li><a href={L(nyAreaPath(area.slug))}>{area.name === 'the Hamptons' ? 'The Hamptons' : area.name}</a></li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
     <section class="svp-cta">
       <div class="wrap">
         <h2 class="display">{spanish ? 'Cuéntenos sobre su evento' : 'Tell us about your New York event'}</h2>
@@ -106,4 +119,10 @@ const services = [
     .nyc-hero,.nyc-services,.nyc-feature {grid-template-columns:1fr}
     .nyc-hero :global(img) {height:360px;object-position:center 75%}
   }
+  #areas-we-serve {scroll-margin-top:96px}
+  .nyc-coverage {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:24px;margin-top:28px}
+  .nyc-coverage h3 {font-size:1.65rem;margin-bottom:12px}
+  .nyc-coverage ul {list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .nyc-coverage a {display:block;border:1px solid var(--line);padding:.6rem .85rem;color:var(--fg);text-decoration:none}
+  .nyc-coverage a:hover,.nyc-coverage a:focus-visible {border-color:var(--crimson-text)}
 </style>

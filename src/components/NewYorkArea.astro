@@ -1,0 +1,92 @@
+---
+import type { ImageMetadata } from 'astro';
+import Layout from '../layouts/Layout.astro';
+import Pic from './Pic.astro';
+import { nyAreaPath, newYorkCoverage, newYorkAreas } from '../i18n/new-york-areas';
+import { localizePath } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+type Area = (typeof newYorkAreas)[number];
+const { area, lang, variant } = Astro.props as { area: Area; lang: Lang; variant: number };
+const spanish = lang === 'es';
+const [focus, planning] = area[lang];
+const name = area.name === 'the Hamptons' && spanish ? 'los Hamptons' : area.name;
+const title = spanish ? `Barras móviles y bartenders en ${name}` : `Mobile Bar & Bartending in ${name}`;
+const quote = spanish ? 'Solicite una cotización' : 'Request a Quote';
+const L = (path: string) => localizePath(path, lang);
+const photos = import.meta.glob<{ default: ImageMetadata }>(
+  ['../assets/img/ev-wedding*.webp', '../assets/img/mb-wedding-cane.jpg', '../assets/img/new-york*.webp', '../assets/img/nyc-rental*.jpg'],
+  { eager: true },
+);
+const image = (name: string) => photos[`../assets/img/${name}`].default;
+const group = newYorkCoverage.find(group => group.areas.includes(area));
+const nearby = (group?.areas ?? []).filter(item => item !== area);
+---
+
+<Layout lang={lang} title={`${title} | WOA Cocktails`} description={`${title}. ${focus}`} styles={['woa-service.css']}>
+  <main class:list={['svc-page', 'area', `layout-${variant}`]}>
+    <section class="wrap area-hero">
+      <div>
+        <a class="link-arrow" href={L('/new-york#areas-we-serve')}>{spanish ? 'Áreas de servicio de Nueva York y alrededores' : 'New York & nearby service areas'}</a>
+        <h1 class="display h-lg">{title}</h1>
+        <p>{focus}</p>
+        <a class="btn btn-solid" href={L('/contact#inquiry-form')}>{quote}</a>
+        <p>{spanish ? 'Certificado de seguro disponible a solicitud.' : 'Certificate of insurance available on request.'}</p>
+      </div>
+      <figure>
+        <Pic src={image(area.event)} alt={spanish ? 'Ejemplo de servicio de barra de WOA' : 'Example of WOA event bar service'} kind="hero" priority />
+        <figcaption>{spanish ? 'Ejemplo de nuestro portafolio de eventos' : 'From the WOA event portfolio'}</figcaption>
+      </figure>
+    </section>
+    <section class="wrap area-details">
+      <figure class="area-rental">
+        <a href={L('/bar-rentals-nyc')}>
+          <Pic src={image(area.rental)} alt={spanish ? 'Barra portátil del catálogo de Nueva York' : 'Portable bar from the New York rentals collection'} kind="half" />
+        </a>
+        <figcaption><a class="link-arrow" href={L('/bar-rentals-nyc')}>{spanish ? 'Ver barras en renta' : 'Explore New York Bar Rentals'}</a></figcaption>
+      </figure>
+      <div>
+        <h2 class="display h-md">{spanish ? `Planifique su evento en ${name}` : `Plan your event in ${name}`}</h2>
+        <p>{planning}</p>
+        <h3 class="display">{spanish ? 'Servicios disponibles' : 'Services you can book'}</h3>
+        <ul>
+          <li><a class="link-arrow" href={L('/staffing')}>{spanish ? 'Bartenders y personal' : 'Bartending & Staffing'}</a></li>
+          <li><a class="link-arrow" href={L('/mobile-bar')}>{spanish ? 'Barra móvil con servicio completo' : 'Full-Service Mobile Bar'}</a></li>
+          <li><a class="link-arrow" href={L('/bar-rentals-nyc')}>{spanish ? 'Renta de barras' : 'Bar Rentals'}</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="svp-cta">
+      <div class="wrap">
+        <h2 class="display">{spanish ? `Cuéntenos sobre su evento en ${name}` : `Tell us about your ${name} event`}</h2>
+        <p>{spanish ? 'Comparta la fecha, el lugar, el número de invitados y el servicio que necesita.' : 'Share your date, venue, guest count, and the service you need.'}</p>
+        <a class="btn btn-solid" href={L('/contact#inquiry-form')}>{quote}</a>
+      </div>
+    </section>
+    {nearby.length > 0 && <nav class="wrap area-nearby" aria-label={spanish ? 'Otras áreas de servicio' : 'Other service areas'}>
+      {nearby.map(item => <a class="link-arrow" href={L(nyAreaPath(item.slug))}>{item.name}</a>)}
+    </nav>}
+  </main>
+</Layout>
+
+<style>
+  .area-hero,.area-details {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,6vw,90px);align-items:center;padding-block:clamp(40px,7vw,100px)}
+  .area h1 {font-size:clamp(42px,5.6vw,86px);margin:20px 0}
+  .area h3 {font-size:1.8rem;margin-top:20px}
+  .area p {color:var(--fg-dim);line-height:1.65;margin:14px 0}
+  .area figure {margin:0;min-width:0}
+  .area figcaption {font-size:.875rem;color:var(--fg-dim);margin-top:8px}
+  .area figure :global(img) {display:block;width:100%;height:clamp(320px,43vw,580px);object-fit:cover;object-position:center 55%}
+  .area-details .area-rental :global(img) {height:auto;aspect-ratio:3/2;object-fit:contain;background:#eeeae5}
+  .area ul {padding-inline-start:20px}
+  .area li {margin-top:8px}
+  .layout-1 .area-hero figure,.layout-2 .area-details figure {order:-1}
+  .layout-2 .area-hero {grid-template-columns:minmax(0,2fr) minmax(0,3fr)}
+  .layout-0 .area-details figure,.layout-1 .area-details figure {order:1}
+  .area-nearby {display:flex;flex-wrap:wrap;gap:20px;padding-block:28px}
+  @media(max-width:760px) {
+    .area-hero,.area-details,.layout-2 .area-hero {grid-template-columns:1fr}
+    .layout-1 .area-hero figure,.layout-2 .area-details figure,.area-details figure {order:1}
+    .area figure :global(img) {height:clamp(260px,76vw,420px)}
+  }
+</style>

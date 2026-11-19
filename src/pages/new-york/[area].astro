@@ -1,0 +1,7 @@
+---
+import NewYorkArea from '../../components/NewYorkArea.astro';
+import { nyAreaRoutes } from '../../i18n/new-york-areas';
+
+export const getStaticPaths = () => nyAreaRoutes('en');
+---
+<NewYorkArea {...Astro.props} />
