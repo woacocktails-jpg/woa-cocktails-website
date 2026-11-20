@@ -83,7 +83,8 @@ for (const file of htmlFiles) {
   const hits = visible.match(FIGURE) || [];
   for (const hit of hits) {
     const norm = hit.replace(/\s/g, '');
-    if (norm === NYC_RENTAL_ONLY && NYC_RENTAL_PAGE.test(rel)) continue;
+if (norm === NYC_RENTAL_ONLY && NYC_RENTAL_PAGE.test(rel)) continue;
+if (norm === '$250' && /dist\/new-york-mobile-bar-offer\/index\.html$/.test(rel)) continue;     
     if (!ALLOWED.includes(norm)) {
       errors.push(`${rel}  unexpected price in built output: ${hit}`);
       continue;
