@@ -1,36 +1,204 @@
 ---
-import hero from '../assets/img/ny-promo-rooftop.jpg';
-import rooftop from '../assets/img/new-york-rooftop-team.webp';
-import bar from '../assets/img/new-york-full-bar.webp';
-import indoorBar from '../assets/img/ny-promo-indoor.jpg';
+import Layout from '../layouts/Layout.astro';
+import Pic from '../components/Pic.astro';
+import rooftop from '../assets/img/ny-promo-rooftop.jpg';
+import indoor from '../assets/img/ny-promo-indoor.jpg';
 import cocktails from '../assets/img/new-york-cocktails.webp';
-import rental from '../assets/img/nyc-rental-event.jpg';
+import fullBar from '../assets/img/new-york-full-bar.webp';
+import bartender from '../assets/img/new-york-residential.webp';
+
+const description = 'Book three hours of full mobile bar service and enjoy your fourth hour complimentary.';
 const quoteUrl = '/contact#inquiry-form';
+
+const gallery = [
+  { image: rooftop, alt: 'WOA mobile bar service at a New York rooftop event' },
+  { image: indoor, alt: 'WOA mobile bar at an indoor New York event' },
+  { image: cocktails, alt: 'WOA bartenders preparing signature cocktails' },
+  { image: fullBar, alt: 'WOA luxury mobile bar setup in New York' },
+  { image: bartender, alt: 'WOA bartender shaking a cocktail at One High Line' },
+];
 ---
-<!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="robots" content="noindex,follow"/>
-<meta name="theme-color" content="#100f0e"/>
-<title>One Complimentary Open Bar Hour | WOA Cocktails New York</title>
-<meta name="description" content="Enjoy one complimentary hour of open bar service with a qualifying three-hour full mobile bar booking in New York. Offer ends December 30, 2026."/>
-<link rel="canonical" href="https://www.woacocktails.com/new-york-mobile-bar-offer"/>
+
+<Layout
+  lang="en"
+  title="New York Open Bar Offer | WOA Cocktails"
+  description={description}
+  styles={['woa-service.css']}
+  noindex
+>
+  <main class="svc-page ny-offer">
+    <header class="wrap offer-intro">
+      <p class="eyebrow">New York · Limited-time offer</p>
+      <h1 class="display h-lg">
+        ONE HOUR OF COMPLIMENTARY OPEN BAR SERVICE.
+        <em>ON US.</em>
+      </h1>
+    </header>
+
+    <section class="wrap" aria-label="WOA New York event gallery">
+      <div class="offer-gallery">
+        {gallery.map(({ image, alt }, index) => (
+          <div>
+            <Pic
+              src={image}
+              alt={alt}
+              kind={index === 0 ? 'half' : 'card'}
+              sizes={index === 0
+                ? '(max-width: 760px) 100vw, 50vw'
+                : '(max-width: 760px) 50vw, 25vw'}
+              priority={index === 0}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap offer-details" aria-labelledby="offer-details">
+      <div>
+        <h2 class="display h-md" id="offer-details">
+          The fourth hour is <em>on us.</em>
+        </h2>
+        <p>{description}</p>
+        <a class="btn btn-solid" href={quoteUrl}>
+          Request a Quote
+          <span class="arr" aria-hidden="true">→</span>
+        </a>
+        <p class="offer-terms">
+          Limited-time offer for qualifying full mobile bar bookings.
+          Subject to availability and the terms confirmed in your quote.
+        </p>
+      </div>
+
+      <div class="offer-inclusions">
+        <h2 class="display">What’s included</h2>
+        <ul>
+          <li>Luxury mobile bar setup and professional bartenders</li>
+          <li>A custom cocktail menu with zero-proof options</li>
+          <li>Premium mixers, fresh garnishes and bar tools</li>
+          <li>Setup, breakdown and a fourth hour of bar service</li>
+        </ul>
+        <h2 class="display">Where we serve</h2>
+        <p>
+          New York City, Long Island, the Hamptons and Northern New Jersey.
+        </p>
+      </div>
+    </section>
+
+    <section class="svp-cta">
+      <div class="wrap">
+        <h2 class="display">
+          Tell us about your <em>New York event.</em>
+        </h2>
+        <p>
+          Share your date, venue and guest count, and mention the
+          complimentary hour when requesting your quote.
+        </p>
+        <a class="btn btn-solid" href={quoteUrl}>
+          Claim the Offer
+          <span class="arr" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&display=swap');
-:root{--bg:#100f0e;--bg2:#1b1917;--bone:#f2ede5;--red:#c63230;--muted:#c4b8aa;--line:rgba(255,255,255,.22)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--bone);font-family:'DM Sans',Arial,sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}img{display:block;width:100%;height:100%;object-fit:cover}button{font:inherit}.shell{width:min(1390px,100%);margin:auto}.top{height:92px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(22px,4vw,68px);border-bottom:1px solid rgba(255,255,255,.16);background:var(--bg);gap:14px}.logo{font-family:Georgia,serif;letter-spacing:.32em;font-size:30px;white-space:nowrap}.logo i{color:var(--red);font-style:normal;font-size:18px;vertical-align:middle;margin-left:6px}.top-mid,.eyebrow,.mini,.top-link,.button,.gallery-cap,.facts,.footnote,.offer-n{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}.top-mid{color:#c4b8b0}.top-link{display:flex;gap:12px;align-items:center;border:1px solid rgba(255,255,255,.36);padding:15px 18px}.top-link b{color:#ef7b70;font-size:14px}.hero{min-height:690px;display:grid;grid-template-columns:54% 46%;overflow:hidden;background:var(--bg)}.hero-copy{padding:clamp(60px,7.5vw,118px) 5vw 55px clamp(26px,6vw,112px);display:flex;flex-direction:column;justify-content:center;position:relative}.hero-copy::after{content:'01 / THE OFFER';position:absolute;left:clamp(26px,6vw,112px);bottom:28px;color:#a99b8e;font-size:10px;letter-spacing:.19em}.eyebrow{color:#df8a80}.hero h1,.statement h2,.gallery-head h2,.closing h2,.story-copy h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.06em;line-height:1.03}.hero h1{font-size:clamp(60px,7.5vw,112px);margin:36px 0 30px;max-width:800px}.hero h1 em,.statement em,.gallery-head em,.story-copy em,.closing h2 em{font-style:italic;color:#db5954}.hero-sub{color:#e3ddd5;font-size:16px;line-height:1.7;max-width:460px;margin:0 0 35px}.hero-meta{color:#b9aa9d;font-size:10px;letter-spacing:.14em;line-height:1.8;margin:27px 0 0;text-transform:uppercase}.button{display:inline-flex;align-items:center;justify-content:space-between;gap:25px;min-height:59px;padding:20px 25px;background:var(--red);color:white;width:fit-content;transition:.2s}.button:hover{background:#e1423b}.button span{font-size:18px;line-height:0}.hero-img{position:relative;min-height:660px}.hero-img img{object-position:center center}.hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,15,14,.16),transparent 45%),linear-gradient(0deg,rgba(16,15,14,.64),transparent 40%)}.hero-img .img-note{position:absolute;bottom:31px;right:32px;z-index:2;font-size:10px;letter-spacing:.2em}.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:center;align-items:center;gap:35px;padding:21px 18px;color:#d5c8bd}.ticker span{font-size:11px;letter-spacing:.16em;text-transform:uppercase}.ticker i{font-style:normal;color:#bd4743}.statement{padding:130px 26px 112px;text-align:center;background:#f1ece5;color:#1b1917}.statement-inner{max-width:1010px;margin:auto}.statement .eyebrow{color:#ad4945}.statement h2{font-size:clamp(47px,6vw,88px);margin:28px auto 22px}.statement .statement-lead{max-width:690px;margin:0 auto 55px;font-size:18px;line-height:1.75;color:#544b43}.steps{display:grid;grid-template-columns:repeat(3,1fr);text-align:left;border-top:1px solid #b7ada0;border-bottom:1px solid #b7ada0;margin-bottom:36px}.steps>div{padding:28px;border-right:1px solid #b7ada0}.steps>div:last-child{border:0}.steps strong{display:block;font-family:Georgia,serif;font-size:24px;font-weight:400;margin:18px 0 9px}.steps p{color:#766d63;font-size:13px;line-height:1.6;margin:0}.statement .button{background:#171615}.statement .button:hover{background:#444}.fine{max-width:850px;margin:23px auto 0;font-size:11px;line-height:1.7;color:#81776e}.gallery{padding:100px max(22px,5vw) 110px}.gallery-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:40px}.gallery-head h2{font-size:clamp(43px,5.5vw,73px);margin:23px 0 0}.gallery-head p{font-size:15px;line-height:1.7;color:#b9b0a6;max-width:285px}.gallery-grid{display:grid;grid-template-columns:1.2fr .8fr 1fr;grid-template-rows:300px 300px;gap:12px}.gallery-grid figure{position:relative;margin:0;overflow:hidden;background:#302c29}.gallery-grid figure:first-child{grid-row:span 2}.gallery-grid figure:nth-child(4){grid-column:span 2}.gallery-grid figure img{transition:transform .4s}.gallery-grid figure:hover img{transform:scale(1.04)}.gallery-grid figure::after{content:'';position:absolute;inset:65% 0 0;background:linear-gradient(transparent,#0009)}.gallery-cap{position:absolute;bottom:19px;left:20px;z-index:1;font-size:10px;color:#fff}.story{display:grid;grid-template-columns:1fr 1fr;background:#211d1b}.story-media{height:650px}.story-copy{padding:70px 8vw 65px;align-self:center}.story-copy h2{font-size:clamp(48px,5vw,78px);margin:25px 0}.story-copy p{font-size:16px;color:#c1b9b0;line-height:1.75;max-width:500px;margin-bottom:30px}.story-copy ul{padding:0;list-style:none;border-top:1px solid var(--line);margin:0 0 33px}.story-copy li{padding:13px 0;border-bottom:1px solid var(--line);font-size:13px;letter-spacing:.07em}.story-copy li::before{content:'+';color:#e0625e;margin-right:13px}.service-bar{background:#f1ece5;color:#1b1917;padding:75px 5vw 85px;text-align:center}.service-bar h2{font:normal clamp(38px,4vw,57px)/1.07 Georgia,serif;letter-spacing:-.045em;margin:20px 0 13px}.service-bar p{color:#6e645b;margin:0 auto 33px;max-width:610px;line-height:1.7}.service-items{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #bcb4ab;border-bottom:1px solid #bcb4ab;max-width:1150px;margin:0 auto}.service-items>div{border-right:1px solid #bcb4ab;padding:27px 12px;text-align:left}.service-items>div:last-child{border:0}.service-items span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#7e746d}.service-items strong{display:block;font:normal 35px Georgia,serif;letter-spacing:-.04em;margin:11px 0}.service-items small{font-size:11px;color:#756d66;line-height:1.55;display:block}.closing{padding:130px 22px;background:radial-gradient(circle at top right,#42201e 0%,#171515 48%,#0d0d0d 100%);text-align:center}.closing h2{font-size:clamp(58px,7vw,98px);margin:25px auto;max-width:900px}.closing p{font-size:17px;line-height:1.75;color:#c9beb5;max-width:680px;margin:0 auto 35px}.closing .fine{color:#a99f96;margin-top:24px}.footer{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:35px max(22px,5vw);border-top:1px solid var(--line)}.footer p{font-size:10px;letter-spacing:.17em;color:#afa49a;line-height:1.7}.mobile-cta{display:none}@media(max-width:1100px){.hero{grid-template-columns:53% 47%}.hero h1{font-size:clamp(56px,7vw,80px)}.story-copy{padding:55px 5vw}}@media(max-width:700px){body{padding-bottom:67px}.top{height:69px;padding:0 19px}.logo{font-size:24px}.top-mid{display:none}.top-link{font-size:9px;padding:13px}.hero{min-height:0;grid-template-columns:1fr}.hero-copy{padding:65px 23px 63px;order:1}.hero-copy::after{left:23px;bottom:23px}.hero-img{height:360px;min-height:0;order:2}.hero h1{font-size:clamp(57px,14vw,86px);margin:26px 0 23px}.hero-sub{font-size:16px}.hero-meta{margin-bottom:23px;padding-bottom:15px}.button{width:100%;justify-content:space-between}.hero-img .img-note{bottom:17px;right:16px}.ticker{gap:13px;flex-wrap:wrap;padding:17px}.ticker i{display:none}.ticker span{font-size:9px}.statement{padding:76px 22px}.statement h2{font-size:clamp(44px,11vw,64px)}.statement .statement-lead{font-size:15px;margin-bottom:32px}.steps{grid-template-columns:1fr}.steps>div{border-right:0;border-bottom:1px solid #b7ada0;padding:24px 5px}.steps>div:last-child{border:0}.gallery{padding:74px 18px}.gallery-head{display:block}.gallery-head p{max-width:450px}.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:300px 200px 220px;gap:8px}.gallery-grid figure:first-child{grid-column:span 2;grid-row:auto}.gallery-grid figure:nth-child(4){grid-column:span 2}.gallery-cap{font-size:9px;bottom:15px;left:15px}.story{grid-template-columns:1fr}.story-media{height:420px}.story-copy{padding:65px 23px}.story-copy h2{font-size:55px}.service-bar{padding:70px 22px}.service-items{grid-template-columns:1fr 1fr}.service-items>div:nth-child(2){border:0}.service-items>div:nth-child(-n+2){border-bottom:1px solid #bcb4ab}.service-items strong{font-size:30px}.closing{padding:85px 23px}.closing h2{font-size:clamp(52px,12vw,75px)}.closing p{font-size:15px}.footer{flex-direction:column;text-align:center;padding:35px 22px}.mobile-cta{position:fixed;z-index:20;bottom:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;background:#100f0e;border-top:1px solid var(--line);padding:12px 17px;gap:10px}.mobile-cta span{font-size:9px;letter-spacing:.1em;color:#d3c6bc}.mobile-cta a{background:var(--red);padding:14px;font-size:10px;font-weight:700;letter-spacing:.1em}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  .offer-intro {
+    padding-top: clamp(112px, 11vw, 160px);
+    padding-bottom: clamp(24px, 4vw, 52px);
+    text-align: center;
+  }
+
+  .offer-intro h1 {
+    max-width: 22ch;
+    margin: 16px auto 0;
+    font-size: clamp(34px, 5.5vw, 76px);
+    text-wrap: balance;
+  }
+
+  .offer-intro em {
+    white-space: nowrap;
+  }
+
+  .offer-gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: repeat(2, clamp(135px, 17vw, 245px));
+    gap: 4px;
+    background: var(--line);
+  }
+
+  .offer-gallery div {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .offer-gallery div:first-child {
+    grid-row: span 2;
+  }
+
+  .offer-gallery :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .offer-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(26px, 7vw, 100px);
+    padding-block: clamp(48px, 8vw, 100px);
+  }
+
+  .offer-details p,
+  .offer-details li {
+    color: var(--fg-dim);
+    line-height: 1.65;
+  }
+
+  .offer-details p {
+    margin-block: 14px 22px;
+  }
+
+  .offer-details .offer-terms {
+    font-size: 14px;
+    margin-bottom: 0;
+    max-width: 48ch;
+  }
+
+  .offer-inclusions h2 {
+    font-size: clamp(28px, 3vw, 38px);
+  }
+
+  .offer-inclusions ul {
+    margin: 14px 0 24px;
+    padding-inline-start: 1.2em;
+  }
+
+  .offer-inclusions li + li {
+    margin-top: 6px;
+  }
+
+  .offer-inclusions p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 760px) {
+    .offer-gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows:
+        clamp(200px, 64vw, 435px)
+        repeat(2, clamp(100px, 29vw, 200px));
+    }
+
+    .offer-gallery div:first-child {
+      grid-row: auto;
+      grid-column: span 2;
+    }
+
+    .offer-details {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
-</head>
-<body>
-<header class="top shell"><a class="logo" href="/" aria-label="WOA Cocktails homepage">WOA <i>◆</i></a><span class="top-mid">NEW YORK · EXCLUSIVE OFFER</span><a class="top-link" href="#book">CHECK AVAILABILITY <b>↗</b></a></header>
-<main>
-<section class="hero shell" aria-labelledby="offer-title"><div class="hero-copy"><div class="eyebrow">WOA COCKTAILS · NEW YORK · LIMITED TIME</div><h1 id="offer-title">One hour of <em>open bar.</em><br/>On us.</h1><p class="hero-sub">A complimentary hour of full mobile bar service when you book three hours for your New York event.</p><a class="button" href="#book">CLAIM YOUR COMPLIMENTARY HOUR <span>↗</span></a><p class="hero-meta">NEW YORK CITY · LONG ISLAND · THE HAMPTONS · NORTHERN NEW JERSEY</p></div><div class="hero-img"><img src={hero.src} width={hero.width} height={hero.height} alt="WOA luxury mobile bar and professional bartenders at an elegant event" fetchpriority="high"/><span class="img-note">THE WOA EXPERIENCE / NEW YORK</span></div></section>
-<div class="ticker shell"><span>Luxury mobile bars</span><i>✦</i><span>Exceptional bartenders</span><i>✦</i><span>Signature cocktails & mocktails</span></div>
-<section class="statement" id="experience"><div class="statement-inner"><span class="eyebrow">AN EXTRA HOUR, OUR TREAT</span><h2>Book three hours.<br/><em>Enjoy four.</em></h2><p class="statement-lead">More time for the first toast, another conversation, and the final round. Everything that makes a great event feel effortless.</p><div class="steps"><div><span class="offer-n">01 / YOUR EVENT</span><strong>Tell us your vision</strong><p>Share your event date, location, and guest count.</p></div><div><span class="offer-n">02 / YOUR BAR</span><strong>Choose full service</strong><p>Our team builds your mobile bar experience around the occasion.</p></div><div><span class="offer-n">03 / YOUR GIFT</span><strong>Enjoy hour four</strong><p>One complimentary hour of bar service with your qualifying booking.</p></div></div><a href="#book" class="button">REQUEST YOUR PRIVATE QUOTE <span>↗</span></a><p class="fine">Book by December 30, 2026. Complimentary fourth hour applies to qualifying three-hour full mobile bar bookings and bar service only. Subject to availability and confirmed booking terms. Excludes staffing-only, standalone rentals and classes.</p></div></section>
-<section class="gallery shell"><div class="gallery-head"><div><span class="eyebrow">BEHIND THE BAR</span><h2>Every detail.<br/><em>Considered.</em></h2></div><p>Luxury bar design, thoughtful presentation, and hospitality that feels personal. These are WOA events, not stock photography.</p></div><div class="gallery-grid"><figure><img src={rooftop.src} width={rooftop.width} height={rooftop.height} alt="WOA bartenders serving at a New York rooftop event" loading="lazy"/><figcaption class="gallery-cap">NEW YORK ROOFTOP EVENTS</figcaption></figure><figure><img src={indoorBar.src} width={indoorBar.width} height={indoorBar.height} alt="WOA bartender welcoming guests at an indoor bar event" loading="lazy"/><figcaption class="gallery-cap">THE MOBILE BAR</figcaption></figure><figure><img src={cocktails.src} width={cocktails.width} height={cocktails.height} alt="WOA bartender crafting cocktails" loading="lazy"/><figcaption class="gallery-cap">COCKTAIL CRAFT</figcaption></figure><figure><img src={rental.src} width={rental.width} height={rental.height} alt="WOA mobile bar at an event" loading="lazy"/><figcaption class="gallery-cap">EVENT-READY DESIGN</figcaption></figure></div></section>
-<section class="story shell"><div class="story-media"><img src={bar.src} width={bar.width} height={bar.height} alt="Luxury WOA mobile bar with professional bartender" loading="lazy"/></div><div class="story-copy"><div class="eyebrow">BUILT AROUND YOUR CELEBRATION</div><h2>Our craft.<br/><em>Your occasion.</em></h2><p>From rooftop celebrations and weddings to corporate gatherings and intimate private events, WOA designs bar experiences that belong in the room.</p><ul><li>Professional bartenders & hospitality staff</li><li>Beautiful mobile bar setups</li><li>Personalized menus, cocktails & mocktails</li><li>Full setup, service & breakdown</li></ul><a href="#book" class="button">PLAN YOUR EVENT <span>↗</span></a></div></section>
-<section class="service-bar"><div class="eyebrow">OTHER WAYS TO CELEBRATE</div><h2>Make the experience yours.</h2><p>Prefer a simpler setup? Explore the services available alongside our full mobile bar experiences.</p><div class="service-items"><div><span>FULL MOBILE BAR</span><strong>$850+</strong><small>Starting rate · qualifying packages may receive the extra hour</small></div><div><span>BARTENDING ONLY</span><strong>$275+</strong><small>Starting rate · not eligible for promotional hour</small></div><div><span>BAR RENTALS</span><strong>$250+</strong><small>Starting rate · not eligible for promotional hour</small></div><div><span>MIXOLOGY CLASSES</span><strong>$55+</strong><small>Per guest · not eligible for promotional hour</small></div></div></section>
-<section class="closing" id="book"><div class="eyebrow">DECEMBER 30, 2026 · BOOKING DEADLINE</div><h2>Your fourth hour is <em>on us.</em></h2><p>Tell us about your event and we'll confirm availability, customize your mobile bar experience, and include the complimentary hour in your quote.</p><a class="button" href={quoteUrl}>REQUEST YOUR NEW YORK QUOTE <span>↗</span></a><p class="fine">You will be directed to WOA's official inquiry form. Please mention the New York complimentary hour promotion in your request.</p></section>
-</main>
-<footer class="footer shell"><a class="logo" href="/">WOA <i>◆</i></a><p>NEW YORK CITY · LONG ISLAND · THE HAMPTONS · NORTHERN NEW JERSEY</p><a class="top-link" href="/">EXPLORE WOA COCKTAILS <b>↗</b></a></footer>
-<div class="mobile-cta"><span>ONE COMPLIMENTARY HOUR</span><a href="#book">CLAIM OFFER ↗</a></div>
-</body></html>
