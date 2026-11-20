@@ -1,13 +1,13 @@
-// ─────────────────────────────────────────────────────────────────────────
-// COPY + PRICE GUARD — runs as part of `npm run build`.
+// -------------------------------------------------------------------------
+// COPY + PRICE GUARD - runs as part of `npm run build`.
 //
 // A past incident put an inconsistent/placeholder price in front of a client,
 // so price consistency is a hard requirement, not a style preference. This
 // script enforces it mechanically, in two passes:
 //
-//   1. SOURCE  — no dollar figure may be hard-coded in a page, component or
+//   1. SOURCE - no dollar figure may be hard-coded in a page, component or
 //                content file. Every price renders from src/i18n/pricing.ts.
-//   2. OUTPUT  — every dollar figure in the BUILT html (EN and ES, including
+//   2. OUTPUT - every dollar figure in the BUILT html (EN and ES, including
 //                the noindex paid landing page) must be one of the confirmed
 //                public figures, and each figure must appear on the pricing
 //                page in both languages.
@@ -17,7 +17,7 @@
 // not.
 //
 // Exit code 1 fails the build, so a stray price can never reach production.
-// ─────────────────────────────────────────────────────────────────────────
+// -------------------------------------------------------------------------
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
@@ -31,6 +31,11 @@ const ALLOWED = ['$275', '$850', '$55', '$125', '$650'];
 const NYC_RENTAL_ONLY = '$950';
 // This size-specific rate is published on the NYC rental pages.
 const NYC_RENTAL_PAGE = /^dist\/(?:es\/)?bar-rentals-nyc\/index\.html$/;
+// NYC ad campaign page is a deliberate, separate promotional offer.
+// This exception does not change public pricing or permit other files to hard-code prices.
+const NYC_OFFER_SOURCE = 'src/pages/new-york-mobile-bar-offer.astro';
+const NYC_OFFER_PAGE = /^dist\/new-york-mobile-bar-offer\/index\.html$/;
+const NYC_OFFER_PRICES = new Set(['$275', '$250', '$55', '$850']);
 const SOURCE_ALLOWLIST = ['src/i18n/pricing.ts'];
 
 const FIGURE = /\$\s?\d{1,3}(?:,\d{3})*(?:\.\d{2})?/g;
@@ -46,31 +51,34 @@ function walk(dir, test, out = []) {
 
 const errors = [];
 
-// ── Pass 1: source ───────────────────────────────────────────────────────
+// -- Pass 1: source -------------------------------------------------------
 const sourceFiles = walk(SRC, (p) => /\.(astro|ts|js|md)$/.test(p));
 for (const file of sourceFiles) {
   const rel = relative(ROOT, file);
   if (SOURCE_ALLOWLIST.includes(rel)) continue;
   const text = readFileSync(file, 'utf8');
   text.split('\n').forEach((line, i) => {
-    // Skip comment lines — a figure quoted in a code comment is not public copy.
+    // Skip comment lines - a figure quoted in a code comment is not public copy.
     const trimmed = line.trim();
     if (trimmed.startsWith('//') || trimmed.startsWith('*') || trimmed.startsWith('/*')) return;
     const hits = line.match(FIGURE);
     if (hits) {
-      errors.push(
-        `${rel}:${i + 1}  hard-coded price ${hits.join(', ')} — render it from src/i18n/pricing.ts instead`
-      );
+      const unexpected = rel === NYC_OFFER_SOURCE
+        ? hits.filter((hit) => !NYC_OFFER_PRICES.has(hit.replace(/\s/g, '')))
+        : hits;
+      if (unexpected.length) {
+        errors.push(`${rel}:${i + 1}  hard-coded price ${unexpected.join(', ')} - render it from src/i18n/pricing.ts instead`);
+      }
     }
   });
 }
 
-// ── Pass 2: built output ─────────────────────────────────────────────────
+// -- Pass 2: built output ------------------------------------------------
 let htmlFiles = [];
 try {
   htmlFiles = walk(DIST, (p) => p.endsWith('.html'));
 } catch {
-  console.log('• dist/ not found, skipping the built-output pass (run after `astro build`).');
+  console.log('dist/ not found, skipping the built-output pass (run after `astro build`).');
 }
 
 const seenOnPricing = { en: new Set(), es: new Set() };
@@ -83,8 +91,8 @@ for (const file of htmlFiles) {
   const hits = visible.match(FIGURE) || [];
   for (const hit of hits) {
     const norm = hit.replace(/\s/g, '');
-if (norm === NYC_RENTAL_ONLY && NYC_RENTAL_PAGE.test(rel)) continue;
-if (norm === '$250' && /dist\/new-york-mobile-bar-offer\/index\.html$/.test(rel)) continue;     
+    if (norm === NYC_RENTAL_ONLY && NYC_RENTAL_PAGE.test(rel)) continue;
+    if (NYC_OFFER_PAGE.test(rel) && NYC_OFFER_PRICES.has(norm)) continue;
     if (!ALLOWED.includes(norm)) {
       errors.push(`${rel}  unexpected price in built output: ${hit}`);
       continue;
@@ -94,7 +102,7 @@ if (norm === '$250' && /dist\/new-york-mobile-bar-offer\/index\.html$/.test(rel)
   }
 }
 
-// ── Pass 3: no em dashes in rendered copy ────────────────────────────────
+// -- Pass 3: no em dashes in rendered copy -------------------------------
 for (const file of htmlFiles) {
   const rel = relative(ROOT, file);
   const html = readFileSync(file, 'utf8');
@@ -111,21 +119,17 @@ if (htmlFiles.length) {
   for (const lang of ['en', 'es']) {
     const missing = ALLOWED.filter((a) => !seenOnPricing[lang].has(a));
     if (missing.length) {
-      errors.push(
-        `${lang === 'en' ? '/pricing' : '/es/pricing'} is missing confirmed figure(s): ${missing.join(', ')}`
-      );
+      errors.push(`${lang === 'en' ? '/pricing' : '/es/pricing'} is missing confirmed figure(s): ${missing.join(', ')}`);
     }
   }
 }
 
-// ── Report ───────────────────────────────────────────────────────────────
+// -- Report ---------------------------------------------------------------
 if (errors.length) {
-  console.error('\n✗ Price consistency check FAILED\n');
+  console.error('\nPrice consistency check FAILED\n');
   for (const e of errors) console.error('  ' + e);
   console.error(`\n  ${errors.length} problem(s). Confirmed public figures: ${ALLOWED.join(', ')}\n`);
   process.exit(1);
 }
 
-console.log(
-  `✓ Copy + price guard passed. Figures ${ALLOWED.join(', ')} render from src/i18n/pricing.ts only; no em dashes in rendered copy.`
-);
+console.log(`Copy + price guard passed. Core figures ${ALLOWED.join(', ')} are guarded; city-specific promotional exception scoped to ${NYC_OFFER_SOURCE}.`);
