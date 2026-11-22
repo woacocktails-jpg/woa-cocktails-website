@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Pic from './Pic.astro';
+import GoogleReviews from './GoogleReviews.astro';
 import { areaPath, coverage, coverageLabels } from '../i18n/south-florida';
 import { localizePath } from '../i18n/utils';
 import type { Lang } from '../i18n/ui';
@@ -108,6 +109,8 @@ const gallery = [
         ))}
       </div>
     </section>
+    <GoogleReviews lang={lang} market="miami" />
+
     <section class="svp-cta">
       <div class="wrap">
         <h2 class="display">{spanish ? 'Cuéntenos sobre su evento en Miami' : 'Tell us about your Miami event'}</h2>

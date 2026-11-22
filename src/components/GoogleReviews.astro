@@ -1,0 +1,93 @@
+---
+import { googleReviews, type ReviewMarket } from '../data/google-reviews';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  market?: ReviewMarket;
+}
+
+const { lang, market } = Astro.props;
+const markets: ReviewMarket[] = market ? [market] : ['nyc', 'miami'];
+const copy = {
+  en: {
+    label: 'From our hosts',
+    title: 'Google Reviews',
+    google: 'View on Google Maps',
+    rating: (value: number) => `${value} out of 5 stars`,
+  },
+  es: {
+    label: 'De nuestros anfitriones',
+    title: 'Reseñas de Google',
+    google: 'Ver en Google Maps',
+    rating: (value: number) => `${value} de 5 estrellas`,
+  },
+}[lang];
+---
+
+<section class="testi" id="testimonials" aria-labelledby="google-reviews-heading">
+  <div class="wrap">
+    <div class="section-head" style="padding:0">
+      <div class="eyebrow amber">{copy.label}</div>
+      <h2 id="google-reviews-heading" class="display h-lg">{copy.title}</h2>
+    </div>
+    {markets.map((key) => {
+      const location = googleReviews[key];
+      return (
+        <section class="review-market" aria-labelledby={`reviews-${key}`}>
+          <div class="market-heading">
+            <h3 id={`reviews-${key}`} class="display">{location.name[lang]}</h3>
+            <a class="link-arrow" href={location.mapsUrl}
+               aria-label={`${copy.google} · ${location.name[lang]}`}>{copy.google}</a>
+          </div>
+          <div class="testi-grid google-reviews">
+            {(market ? location.reviews : location.featured).map((review) => (
+              <figure class="testi-card">
+                <div class="stars">
+                  <span aria-hidden="true">{'★ '.repeat(review.rating).trim()}</span>
+                  <span class="visually-hidden">{copy.rating(review.rating)}</span>
+                </div>
+                <blockquote class="body" lang="en">
+                  {review.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+                </blockquote>
+                <figcaption class="author">{review.name}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+  .review-market { margin-top: clamp(36px, 6vw, 64px); }
+  .market-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+  }
+  .market-heading h3 { font-size: 32px; }
+  .testi-grid.google-reviews {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 18px;
+  }
+  .google-reviews .testi-card { margin: 0; min-height: 0; }
+  .google-reviews .body { margin: 0; overflow-wrap: anywhere; }
+  .google-reviews .body p + p { margin-top: 1em; }
+  .google-reviews .author { color: var(--fg); text-transform: none; }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  @media (max-width: 700px) {
+    .testi-grid.google-reviews { grid-template-columns: 1fr; }
+    .google-reviews .testi-card { padding: 28px 24px; }
+  }
+</style>
