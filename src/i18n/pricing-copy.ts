@@ -1,3 +1,5 @@
+import { replyTime } from './house';
+
 // Copy for the public pricing page (EN + ES).
 //
 // Strings only. Every dollar figure comes from src/i18n/pricing.ts, so a price
@@ -90,7 +92,7 @@ const en: PricingCopy = {
         'Premium mixers, garnishes, fresh ice and glassware',
         'Setup and breakdown handled by our team',
       ],
-      note: 'Three-hour minimum service window. Your quote scales with hours, guest count and menu complexity.',
+      note: 'Packages start at three hours, with shorter bookings available at the same minimum rate. Your quote scales with hours, guest count and menu complexity.',
       cta: 'Inquire for the mobile bar',
     },
     {
@@ -159,7 +161,7 @@ const en: PricingCopy = {
       },
       {
         q: 'How do I get an exact quote?',
-        a: 'Send your date, location, guest count and the service you need. We reply with a tailored proposal within two business days, or sooner if your date is close.',
+        a: `Send your date, location, guest count and the service you need. ${replyTime.en}`,
       },
     ],
   },
@@ -167,7 +169,7 @@ const en: PricingCopy = {
     eyebrow: 'Next step',
     title: 'Ready for a ',
     titleIt: 'real',
-    body: 'Tell us the date, the market and what you are hosting. We will send a tailored proposal within two business days.',
+    body: `Tell us the date, the market and what you are hosting. ${replyTime.en}`,
     primary: 'Request a quote',
     secondary: 'All ways to reach us',
   },
@@ -218,7 +220,7 @@ const es: PricingCopy = {
         'Mixers premium, garnishes, hielo fresco y cristalería',
         'Montaje y desmontaje a cargo de nuestro equipo',
       ],
-      note: 'Mínimo de tres horas de servicio. Su cotización varía según las horas, el número de invitados y la complejidad del menú.',
+      note: 'Los paquetes parten de tres horas, con reservas más cortas disponibles a la misma tarifa mínima. Su cotización varía según las horas, el número de invitados y la complejidad del menú.',
       cta: 'Solicite la barra móvil',
     },
     {
@@ -287,7 +289,7 @@ const es: PricingCopy = {
       },
       {
         q: '¿Cómo obtengo una cotización exacta?',
-        a: 'Envíenos su fecha, ubicación, número de invitados y el servicio que necesita. Le respondemos con una propuesta a la medida en un plazo de dos días hábiles, o antes si su fecha está cerca.',
+        a: `Envíenos su fecha, ubicación, número de invitados y el servicio que necesita. ${replyTime.es}`,
       },
     ],
   },
@@ -295,7 +297,7 @@ const es: PricingCopy = {
     eyebrow: 'Siguiente paso',
     title: '¿Listo para una ',
     titleIt: 'cotización real',
-    body: 'Cuéntenos la fecha, el mercado y lo que va a celebrar. Le enviamos una propuesta a la medida en un plazo de dos días hábiles.',
+    body: `Cuéntenos la fecha, el mercado y lo que va a celebrar. ${replyTime.es}`,
     primary: 'Solicite una cotización',
     secondary: 'Todas las formas de contactarnos',
   },

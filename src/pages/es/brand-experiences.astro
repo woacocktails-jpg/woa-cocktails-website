@@ -1,4 +1,5 @@
 ---
+import { replyTime } from '../../i18n/house';
 import Layout from '../../layouts/Layout.astro';
 import Pic from '../../components/Pic.astro';
 import bxTakeoverCrew from '../../assets/img/bx-takeover-crew.jpg';
@@ -46,7 +47,7 @@ const BX_FORMATS = [
 // ── PROCESS (covers both services) ───────────────────────────────────
 const BX_STEPS = [
   { n: '01', t: 'Llamada de descubrimiento', d: '30 minutos. Ya sea una toma de bar de una noche o un programa de barra completo, empezamos por el brief.' },
-  { n: '02', t: 'Propuesta y alcance', d: 'En un plazo de dos días hábiles: dirección de concepto, alcance, cronograma y una cotización todo incluido.' },
+  { n: '02', t: 'Propuesta y alcance', d: 'Dirección de concepto, alcance, cronograma y una cotización todo incluido.' },
   { n: '03', t: 'Diseño y construcción', d: 'Carta, personal y guion de la noche para las tomas de bar; diseño, capacitación y documentación para la consultoría.' },
   { n: '04', t: 'Ejecución', d: 'Manejamos la noche, o ponemos en marcha el programa y entrenamos a tu equipo para que lo haga suyo.' },
 ];
@@ -345,12 +346,10 @@ const BX_FAQ = [
           Tome un <span class="it" style="color:var(--crimson-text)">salón</span>, <br />o construya el suyo.
         </h2>
         <p>
-          Llamada de descubrimiento de 30 minutos. Cuéntenos si se trata de una toma de bar
-          de una noche o de un programa de barra completo, y le enviaremos una propuesta a la
-          medida en un plazo de dos días hábiles.
+          Cuéntenos si está planeando una intervención de una noche o un programa completo de bar. {replyTime.es}
         </p>
         <div class="cta-row">
-          <a href="/es/contact" class="btn btn-solid">Reserve una llamada de descubrimiento <span class="arr">→</span></a>
+          <a href="/es/contact#inquiry-form" class="btn btn-solid">Solicite una cotización</a>
           <a href="/es/contact" class="btn btn-ghost">Todas las formas de contactarnos</a>
         </div>
       </div>

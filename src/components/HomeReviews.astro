@@ -1,0 +1,48 @@
+---
+interface Props {
+  lang: 'en' | 'es';
+}
+
+const { lang } = Astro.props;
+const copy = {
+  en: {
+    label: 'From our hosts',
+    title: 'Google Reviews',
+    cities: ['New York City', 'Miami'],
+    placeholder: 'Google reviews will appear here once verified.',
+  },
+  es: {
+    label: 'De nuestros anfitriones',
+    title: 'Reseñas de Google',
+    cities: ['Nueva York', 'Miami'],
+    placeholder: 'Las reseñas de Google aparecerán aquí una vez verificadas.',
+  },
+}[lang];
+---
+
+<section class="testi" id="testimonials" aria-labelledby="google-reviews-heading">
+  <div class="wrap">
+    <div class="section-head" style="padding:0">
+      <div class="eyebrow amber">{copy.label}</div>
+      <h2 id="google-reviews-heading" class="display h-lg">{copy.title}</h2>
+    </div>
+    <div class="testi-grid google-reviews">
+      {copy.cities.map((city) => (
+        <section class="testi-card">
+          <h3 class="display">{city}</h3>
+          <p>{copy.placeholder}</p>
+        </section>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testi-grid.google-reviews { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .google-reviews .testi-card { min-height: 0; gap: 12px; }
+  .google-reviews h3 { font-size: 32px; }
+  .google-reviews p { color: var(--fg-dim); line-height: 1.7; }
+  @media (max-width: 700px) {
+    .testi-grid.google-reviews { grid-template-columns: 1fr; }
+  }
+</style>

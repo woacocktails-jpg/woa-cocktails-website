@@ -1,4 +1,5 @@
 ---
+import { replyTime } from '../i18n/house';
 import Layout from '../layouts/Layout.astro';
 import Pic from '../components/Pic.astro';
 import teamFabioHector from '../assets/img/team-fabio-hector.webp';
@@ -60,7 +61,7 @@ const ROLES = [
 // ── How it works ─────────────────────────────────────────────────────
 const ST_STEPS = [
   { n: '01', t: 'Discovery call', d: '30 minutes: date, guest count, event style, scope. We assess fit and staffing needs.' },
-  { n: '02', t: 'Tailored team', d: 'Within two business days: proposed team composition, ratios, lead, all-in quote.' },
+  { n: '02', t: 'Tailored team', d: 'Proposed team composition, ratios, lead, all-in quote.' },
   { n: '03', t: 'Pre-event briefing', d: 'Captain meets host, walks the venue. Timing, run-of-show, contingencies aligned.' },
   { n: '04', t: 'Event day', d: 'Team arrives uniformed and briefed. We host. You enjoy your own event.' },
 ];
@@ -292,11 +293,10 @@ const ST_FAQ = [
           Staff your <span class="it" style="color:var(--crimson-text)">next</span> event.
         </h2>
         <p>
-          30-minute discovery call. We'll assess the brief, propose the right team
-          shape, and send a quote within two business days.
+          Share your event details and we’ll recommend a team for your service. {replyTime.en}
         </p>
         <div class="cta-row">
-          <a href="/contact" class="btn btn-solid">Book a discovery call <span class="arr">→</span></a>
+          <a href="/contact#inquiry-form" class="btn btn-solid">Get a Quote</a>
           <a href="/contact" class="btn btn-ghost">All ways to reach us</a>
         </div>
       </div>

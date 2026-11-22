@@ -1,4 +1,5 @@
 ---
+import { replyTime, bookingMinimum } from '../i18n/house';
 import Layout from '../layouts/Layout.astro';
 import Pic from '../components/Pic.astro';
 import mbHeroPuma from '../assets/img/mb-hero-puma.webp';
@@ -34,7 +35,7 @@ const IDEAL = [
 // ── Chapter 05 — Process ──
 const STEPS = [
   { n: '01', t: 'Discovery call', d: 'A 30-minute consult: date, vision, market, scope. No pressure.' },
-  { n: '02', t: 'Tailored proposal', d: 'Within two business days: bar build, staffing options, menu direction, all-in quote.' },
+  { n: '02', t: 'Tailored proposal', d: 'Bar build, staffing options, menu direction, all-in quote.' },
   { n: '03', t: 'Menu & build', d: 'Tasting (optional). Signature cocktails finalized. Bar build and styling locked.' },
   { n: '04', t: 'Event day', d: 'We arrive early. Set up, host, break down, leave clean. You stay a guest at your own event.' },
 ];
@@ -42,7 +43,7 @@ const STEPS = [
 // ── FAQ ──
 const MB_FAQ = [
   { q: 'How is pricing structured?',
-    a: 'Every event is quoted custom: there are too many variables (guest count, hours, market, bar build, menu complexity, staffing, market) for a flat rate to be honest. After a 30-minute discovery call we send a full proposal within two business days.' },
+    a: 'Every event is quoted custom: there are too many variables (guest count, hours, market, bar build, menu complexity, staffing, market) for a flat rate to be honest. After we review your event details, we’ll put together a full proposal.' },
   { q: 'Does WOA Cocktails provide alcohol?',
     a: 'WOA Cocktails coordinates and curates the complete beverage experience. We can assist with menu planning, shopping lists, quantities, mixers, garnishes, and all beverage-related details to ensure a seamless service.' },
   { q: 'Can you match the setup with my event theme or aesthetic?',
@@ -50,7 +51,7 @@ const MB_FAQ = [
   { q: 'What is included in the luxury mobile bar?',
     a: 'The full bar build: front and back-bar setup, glassware, ice well, garnish station, signage if applicable. Our bars come in several footprints; we\'ll spec the right size to your venue and guest count.' },
   { q: 'How many guests can WOA serve?',
-    a: 'Packages start from a 20-guest minimum and scale to events of 500+. Staffing and bar count scale with guest count to maintain a sub-3-minute service standard at peak.' },
+    a: bookingMinimum.en },
   { q: 'Can you create a signature cocktail for our event?',
     a: 'Yes, custom signature cocktail development is available as an add-on if needed. We can build around a theme, color palette, name, or even a guest of honor.' },
 ];
@@ -355,11 +356,10 @@ const MB_FAQ = [
           Let's build <span class="it" style="color:var(--crimson-text)">your</span> bar.
         </h2>
         <p>
-          30-minute discovery call. We listen, we share ideas, and you'll have a
-          tailored proposal in your inbox within two business days.
+          Tell us about your event and we’ll put together a proposal for your bar. {replyTime.en}
         </p>
         <div class="cta-row">
-          <a href="/contact" class="btn btn-solid">Book a discovery call <span class="arr">→</span></a>
+          <a href="/contact#inquiry-form" class="btn btn-solid">Get a Quote</a>
           <a href="/contact" class="btn btn-ghost">All ways to reach us</a>
         </div>
       </div>

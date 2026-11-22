@@ -1,4 +1,5 @@
 ---
+import { replyTime } from '../i18n/house';
 import Layout from '../layouts/Layout.astro';
 import Pic from '../components/Pic.astro';
 import classHero from '../assets/img/class-hero.webp';
@@ -208,11 +209,10 @@ const C_FAQ = [
           Book your <span class="it" style="color:var(--crimson-text)">class</span>.
         </h2>
         <p>
-          30-minute discovery call. We'll lock format, menu and date, and have a
-          tailored proposal in your inbox within two business days.
+          Tell us what you’re planning and we’ll help shape the class, menu, and date. {replyTime.en}
         </p>
         <div class="cta-row">
-          <a href="/contact" class="btn btn-solid">Book a discovery call <span class="arr">→</span></a>
+          <a href="/contact#inquiry-form" class="btn btn-solid">Get a Quote</a>
           <a href="/contact" class="btn btn-ghost">All ways to reach us</a>
         </div>
       </div>

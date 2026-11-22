@@ -2,7 +2,7 @@
 //
 // Kept out of the .astro files so the English and Spanish pages render the
 // SAME markup, only the strings differ. Copy is message-matched to the Google
-// ad (local Miami / Miami Beach / Brickell searches, 3-hour minimum, bartender
+// ad (local Miami / Miami Beach / Brickell searches, three-hour package, bartender
 // included, starting price) to protect Quality Score.
 //
 // PRICES: never written here. Every figure is pulled from src/i18n/pricing.ts
@@ -14,6 +14,7 @@
 //
 // Some fields carry inline HTML (marked `… (HTML)`) and are rendered with
 // `set:html` — preserve the <b>/<em> tags and &amp; entities exactly.
+import { bookingMinimum, houseStats, replyTime } from './house';
 import { priceFrom } from './pricing';
 
 export type Lang = 'en' | 'es';
@@ -178,7 +179,7 @@ const en: LpContent = {
     area: [
       '<b>Miami</b> · Miami Beach · Brickell',
       'Bartender <b>included</b>',
-      '<b>3-hour</b> minimum',
+      '<b>3-hour</b> packages',
       `Full service <b>${priceFrom('mobilebar', 'en')}</b>`,
     ],
   },
@@ -240,12 +241,8 @@ const en: LpContent = {
     ix: '[ 04 / Why WOA ]',
     h2Lead: 'A luxury hospitality house: ',
     h2It: 'not a party rental.',
-    intro: 'WOA is a full-service beverage & hospitality house. The same team behind hundreds of curated events now brings the cart to South Florida.',
-    stats: [
-      { b: '500+', label: 'Events curated' },
-      { b: '25yr', label: 'Combined experience' },
-      { b: '5★', label: 'Average rating' },
-    ],
+    intro: 'WOA is a full-service beverage & hospitality house. Our team brings the mobile bar to events across South Florida.',
+    stats: Object.values(houseStats.en),
     testi: [
       { body: 'WOA Cocktails completely elevated our wedding. The drinks were incredible, the bartenders were professional and friendly, and the mobile bar setup looked stunning. Our guests are still talking about the espresso martinis.', who: 'Wedding', role: 'Private Celebration' },
       { body: 'Thank you so much for catering our event. The bar service was excellent, and we got really positive feedback, in no small part due to your contributions. We will definitely reach out for future events.', who: 'Nina Sevilla', role: 'Corporate Event' },
@@ -274,7 +271,7 @@ const en: LpContent = {
     quoteHead: 'Request a quote',
     quoteMeta: '~2 min',
     quoteFoot: 'Goes straight to <b>Fabio &amp; Hector</b>: no inbox, no middleman.',
-    quoteReply: 'Reply <b>≤ 2 days</b>',
+    quoteReply: replyTime.en,
     callHead: 'Prefer to talk? Book a call',
     callMeta: '30 min',
     callFoot: 'Video call · no commitment',
@@ -298,7 +295,7 @@ const en: LpContent = {
     ],
     faqEyebrow: 'Good to know',
     faq: [
-      { q: "What's the minimum booking?", a: "Three hours of full mobile bar cart service. That's the minimum that lets us arrive fully staffed and stocked and give your guests the complete experience." },
+      { q: "What's the minimum booking?", a: bookingMinimum.en },
       { q: 'Where do you serve?', a: 'Greater South Florida: Miami-Dade, Broward and Palm Beach counties. Outside that radius? Ask us; we take select events further out with travel quoted separately.' },
       { q: 'Is a bartender included?', a: "Yes. Every cart booking comes with a professional WOA bartender. This isn't a self-serve rental: we run the bar for you." },
       { q: 'Do you provide the alcohol?', a: "We curate the complete beverage experience: menu, mixers, garnishes, quantities and shopping guidance. We'll walk you through exactly what to provide so service is seamless." },
@@ -334,7 +331,7 @@ const es: LpContent = {
     area: [
       '<b>Miami</b> · Miami Beach · Brickell',
       'Bartender <b>incluido</b>',
-      'Mínimo <b>3 horas</b>',
+      'Paquetes desde <b>3 horas</b>',
       `Servicio completo <b>${priceFrom('mobilebar', 'es')}</b>`,
     ],
   },
@@ -396,12 +393,8 @@ const es: LpContent = {
     ix: '[ 04 / Por qué WOA ]',
     h2Lead: 'Una casa de hospitalidad de lujo: ',
     h2It: 'no un alquiler de fiestas.',
-    intro: 'WOA es una casa de bebidas y hospitalidad de servicio completo. El mismo equipo detrás de cientos de eventos a la medida ahora lleva la barra al Sur de Florida.',
-    stats: [
-      { b: '500+', label: 'Eventos creados' },
-      { b: '25 años', label: 'Experiencia combinada' },
-      { b: '5★', label: 'Calificación promedio' },
-    ],
+    intro: 'WOA es una casa de bebidas y hospitalidad de servicio completo. Nuestro equipo lleva la barra móvil a eventos en todo el sur de Florida.',
+    stats: Object.values(houseStats.es),
     testi: [
       { body: 'WOA Cocktails elevó por completo nuestra boda. Los tragos estaban increíbles, los bartenders fueron profesionales y amables, y el montaje de la barra móvil se veía espectacular. Nuestros invitados todavía hablan de los espresso martinis.', who: 'Boda', role: 'Celebración privada' },
       { body: 'Muchísimas gracias por atender nuestro evento. El servicio de barra fue excelente y recibimos comentarios muy positivos, en buena parte gracias a ustedes. Sin duda los buscaremos para futuros eventos.', who: 'Nina Sevilla', role: 'Evento corporativo' },
@@ -430,7 +423,7 @@ const es: LpContent = {
     quoteHead: 'Solicite una cotización',
     quoteMeta: '~2 min',
     quoteFoot: 'Llega directo a <b>Fabio y Hector</b>: sin bandeja de entrada, sin intermediarios.',
-    quoteReply: 'Respuesta <b>≤ 2 días</b>',
+    quoteReply: replyTime.es,
     callHead: '¿Prefiere hablar? Reserve una llamada',
     callMeta: '30 min',
     callFoot: 'Videollamada · sin compromiso',
@@ -454,7 +447,7 @@ const es: LpContent = {
     ],
     faqEyebrow: 'Bueno saber',
     faq: [
-      { q: '¿Cuál es la reserva mínima?', a: 'Tres horas de servicio completo de barra móvil. Es el mínimo que nos permite llegar con el equipo completo y todo abastecido, y darles a sus invitados la experiencia entera.' },
+      { q: '¿Cuál es la reserva mínima?', a: bookingMinimum.es },
       { q: '¿Dónde ofrecen servicio?', a: 'En el Gran Sur de Florida: los condados de Miami-Dade, Broward y Palm Beach. ¿Fuera de ese radio? Pregúntenos; aceptamos eventos selectos más lejos, con el viaje cotizado por separado.' },
       { q: '¿Incluye bartender?', a: 'Sí. Cada reserva de la barra incluye un bartender profesional de WOA. No es un alquiler de autoservicio: operamos la barra por usted.' },
       { q: '¿Ustedes proveen el alcohol?', a: 'Curamos la experiencia de bebidas completa: menú, mixers, garnishes, cantidades y guía de compras. Le explicaremos exactamente qué proveer para que el servicio sea impecable.' },

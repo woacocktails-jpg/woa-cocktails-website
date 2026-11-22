@@ -79,8 +79,8 @@ const navServices = services.map((s) => ({
         </a>
       )
     }
-    <a href={L('/contact')} class="btn btn-solid nav-book">
-      {t(lang, 'nav.book')} <span class="arr">→</span>
+    <a href={L('/contact#inquiry-form')} class="btn btn-solid nav-book">
+      {t(lang, 'nav.book')}
     </a>
     <button class="nav-burger" aria-label={t(lang, 'nav.openMenu')} aria-expanded="false" data-burger>
       <span></span><span></span><span></span>
@@ -118,8 +118,8 @@ const navServices = services.map((s) => ({
     <a href={L('/contact#inquiry-form')}>{t(lang, 'nav.contact')}</a>
     <a href={switchHref} class="drawer-lang">{t(lang, 'lang.switchTo')}</a>
     <div class="nav-drawer-foot">
-      <a href={L('/contact')} class="btn btn-solid">
-        {t(lang, 'nav.book')} <span class="arr">→</span>
+      <a href={L('/contact#inquiry-form')} class="btn btn-solid">
+        {t(lang, 'nav.book')}
       </a>
     </div>
   </div>

@@ -534,11 +534,6 @@ section{position:relative}
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(11,9,7,0.18),rgba(11,9,7,0.55) 100%);
 }
-.miami-stamp{
-  position:absolute;left:32px;top:32px;z-index:2;
-  font-family:var(--mono);font-size:10px;color:var(--fg);letter-spacing:0.22em;text-transform:uppercase;
-  background:var(--crimson);padding:8px 12px;
-}
 .miami-cap{
   position:absolute;left:32px;bottom:24px;z-index:2;
   font-family:var(--mono);font-size:10px;color:var(--fg-dim);letter-spacing:0.04em;
@@ -562,6 +557,7 @@ section{position:relative}
   letter-spacing:-0.005em;max-width:32ch;
 }
 .quote::before{content:"\201C";color:var(--crimson-text);font-size:1.4em;line-height:0;vertical-align:-0.2em;margin-right:4px}
+.founder-bios{margin-top:64px;display:grid;grid-template-columns:1fr 1fr;gap:24px;padding-top:32px;border-top:1px solid var(--line)}
 .quote-sig{
   margin-top:32px;display:flex;align-items:center;gap:14px;
   font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--fg-mute);
@@ -714,12 +710,11 @@ section{position:relative}
 @media (max-width:720px){
   body{font-size:14.5px}
 
-  /* nav: slim bar — logo + ES/EN toggle + compact Book + hamburger */
+  /* nav: slim bar — logo + ES/EN toggle + compact quote button + hamburger */
   .nav{padding:16px 16px}
   .nav-right{gap:7px}
   .nav-home{display:none}     /* redundant on phones — the logo already links home */
-  .nav-book{display:inline-flex}   /* keep Book Now on the bar */
-  .nav-book .arr{display:none}     /* drop the arrow to save bar width */
+  .nav-book{display:inline-flex}
   .logo{font-size:20px;letter-spacing:0.36em;padding-left:0.36em}
   .logo .diamond{width:8px;height:8px;margin-left:7px;transform:rotate(45deg) translateY(-3px)}
   /* on phones, lock logo to compact "WOA" — no expand-on-scroll, no room for it */
@@ -780,7 +775,6 @@ section{position:relative}
   /* miami: shrink hero image, single-col checks, tighter body */
   .miami-img{min-height:340px}
   .miami-body{padding:48px 22px}
-  .miami-stamp{left:18px;top:18px;font-size:9.5px;padding:7px 10px}
   .miami-cap{display:none}
   .checks{grid-template-columns:1fr;gap:10px;margin-top:24px}
   .checks li{font-size:13.5px}
@@ -788,6 +782,7 @@ section{position:relative}
 
   /* founders: portraits side-by-side but remove the offset & shrink */
   .founders-grid{gap:32px}
+  .founder-bios{grid-template-columns:1fr;margin-top:32px}
   .founder-stack{gap:10px}
   .founder-img.tall{transform:none !important;aspect-ratio:3/4}
   .quote{font-size:20px !important;line-height:1.45}

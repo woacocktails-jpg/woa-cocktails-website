@@ -1,0 +1,61 @@
+---
+interface Props {
+  lang: 'en' | 'es';
+}
+
+const { lang } = Astro.props;
+const copy = {
+  en: {
+    label: 'The WOA Standard',
+    title: 'Professionalism Behind Every Experience',
+    details: [
+      { title: 'Insurance & documentation', body: 'We carry general and liquor liability insurance and workers’ compensation coverage. A certificate of insurance (COI) is available on request.' },
+      { title: 'Professional bartenders & wine expertise', body: 'Our bartenders serve custom cocktails and bring wine expertise to selection and service.' },
+      { title: 'Custom experiences', body: 'We tailor the bar, beverage menu, and service to your event.' },
+    ],
+  },
+  es: {
+    label: 'El estándar WOA',
+    title: 'Profesionalismo detrás de cada experiencia',
+    details: [
+      { title: 'Seguros y documentación', body: 'Contamos con seguros de responsabilidad civil general y por servicio de alcohol, y con cobertura de compensación laboral. El certificado de seguro (COI) está disponible a solicitud.' },
+      { title: 'Bartenders profesionales y experiencia en vinos', body: 'Nuestros bartenders preparan cócteles personalizados y aportan su experiencia en la selección y el servicio de vinos.' },
+      { title: 'Experiencias a medida', body: 'Adaptamos la barra, el menú de bebidas y el servicio a su evento.' },
+    ],
+  },
+}[lang];
+---
+
+<section class="home-trust" id="woa-standard" aria-labelledby="woa-standard-heading">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">{copy.label}</div>
+      <h2 id="woa-standard-heading" class="display h-lg">{copy.title}</h2>
+    </div>
+    <div class="trust-details">
+      {copy.details.map(({ title, body }) => (
+        <div>
+          <h3 class="display">{title}</h3>
+          <p>{body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-trust { padding-bottom: clamp(56px, 8vw, 104px); }
+  .home-trust .h-lg { max-width: 20ch; }
+  .trust-details {
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 40px;
+    padding-top: 28px;
+  }
+  .trust-details h3 { font-size: 26px; }
+  .trust-details p { margin-top: 10px; color: var(--fg-dim); line-height: 1.7; }
+  @media (max-width: 700px) {
+    .trust-details { grid-template-columns: 1fr; }
+  }
+</style>

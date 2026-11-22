@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Pic from '../components/Pic.astro';
 import foundersCheers from '../assets/img/founders-cheers.jpg';
 
+import { bookingMinimum, houseStats, replyTime } from '../i18n/house';
+
 // Live Calendly scheduler URL (dark-themed via params).
 const CALENDLY_URL = "https://calendly.com/woacocktails/30min?hide_gdpr_banner=1&background_color=0b0907&text_color=ebe3d2&primary_color=c5302d";
 
@@ -13,7 +15,7 @@ const TALLY_SRC = "https://tally.so/embed/2ERkDj?alignLeft=1&hideTitle=1&transpa
 const FAQS = [
   {
     q: "What is the minimum I can book an event for?",
-    a: "Our packages start at 20 guests and a minimum of 3 hours of full beverage service.",
+    a: bookingMinimum.en,
   },
   {
     q: "How far in advance do I need to reach out for an event?",
@@ -66,26 +68,14 @@ const FAQS = [
               Let's host <span class="it" style="color:var(--crimson-text)">something</span><br />unforgettable.
             </h1>
             <p>
-              Book a discovery call with WOA. We'll listen, share ideas
-              and send a tailored proposal within two business days.
+              Tell us about your event and we’ll reply personally. {replyTime.en}
             </p>
             <div class="cx-meta">
-              <div>
-                <span class="stat-lg">2-Day</span>
-                Response
-              </div>
-              <div>
-                <span class="stat-lg">500+</span>
-                Events curated
-              </div>
-              <div>
-                <span class="stat-lg">5★</span>
-                Avg. rating
-              </div>
+              {Object.values(houseStats.en).map((stat) => (
+                <div><span class="stat-lg">{stat.b}</span>{stat.label}</div>
+              ))}
             </div>
-            <a href="#schedule" class="btn btn-solid cx-hero-cta">
-              Jump to scheduler <span class="arr">↓</span>
-            </a>
+            <a href="#inquiry-form" class="btn btn-solid cx-hero-cta">Get a Quote</a>
           </div>
           <figure class="cx-hero-photo">
             <Pic src={foundersCheers} alt="WOA co-founders Fabio Perez and Hector Taveras sharing a laugh and a toast at the bar" kind="half" priority />
@@ -98,57 +88,15 @@ const FAQS = [
       </div>
     </section>
 
-    {/* ── Live Calendly scheduler ── */}
-    <section class="cx-main">
-      <div class="wrap">
-        <div class="cx-sched" id="schedule">
-          <header class="cx-sched-head">
-            <div class="lhs">
-              <span class="eyebrow">Discovery Call</span>
-              <h2 class="display h-md" style="margin:10px 0 6px;font-size:clamp(28px, 3.6vw, 44px)">
-                Book a <span class="it" style="color:var(--crimson-text)">discovery</span> call.
-              </h2>
-              <p>30 minutes · Video call · No commitment · NYC &amp; Miami</p>
-            </div>
-            <div class="rhs">
-              <div class="cx-badge">
-                <span>30</span><small>MIN</small>
-              </div>
-            </div>
-          </header>
-
-          {/* Calendly scheduler — deferred (loads on view / click / #schedule
-              deep-link) to keep the initial page light and avoid eager
-              third-party cookies. Reserves its full height → no layout shift. */}
-          <div
-            class="cx-calendly"
-            data-embed-calendly
-            data-url={CALENDLY_URL}
-            style="min-width:320px;height:700px"
-          >
-            <button type="button" class="cx-embed-cta" data-embed-trigger>
-              <span class="cx-embed-cta-main">Load the scheduler</span>
-              <span class="cx-embed-cta-sub">Calendly · 30-minute call</span>
-            </button>
-          </div>
-
-          <footer class="cx-sched-foot">
-            <span>Pick any time that works, the call is with Hector or Fabio.</span>
-            <span class="pwby">Powered by <b>Calendly</b></span>
-          </footer>
-        </div>
-      </div>
-    </section>
-
     {/* ── Inquiry form — live Tally embed ── */}
     <section class="cx-form-sec" id="inquiry-form">
       <div class="wrap">
         <div class="cx-form-head">
-          <span class="eyebrow">Or skip the call</span>
+          <span class="eyebrow">Event inquiry</span>
           <h2 class="display h-md" style="margin-top:14px">
-            Already know exactly <span class="it" style="color:var(--crimson-text)">what you need?</span>
+            Get a <span class="it" style="color:var(--crimson-text)">quote.</span>
           </h2>
-          <p>Send the details and we'll come back with ideas and a tailored quote.</p>
+          <p>Send the details and we'll come back with ideas and a tailored quote. We accept credit cards, Apple Pay, and ACH transfers.</p>
         </div>
 
         <div class="cx-form-layout">
@@ -179,14 +127,14 @@ const FAQS = [
                   <span class="cx-step-n">01</span>
                   <div>
                     <b>We read it ourselves</b>
-                    <p>Every inquiry goes straight to Hector and Fabio: no inbox, no middleman.</p>
+                    <p>Fabio, Hector, or a member of the WOA team reads your inquiry personally.</p>
                   </div>
                 </li>
                 <li>
                   <span class="cx-step-n">02</span>
                   <div>
-                    <b>You hear back within 2 business days</b>
-                    <p>With first ideas, availability, and a quote tailored to your event.</p>
+                    <b>We reply personally</b>
+                    <p>{replyTime.en}</p>
                   </div>
                 </li>
                 <li>
@@ -201,8 +149,8 @@ const FAQS = [
 
             <div class="cx-aside-foot">
               <div class="cx-aside-stat">
-                <b>≤ 2 days</b>
-                <span>Typical reply time</span>
+                <b>30 min</b>
+                <span>Typical reply during business hours</span>
               </div>
               <div class="cx-aside-stat">
                 <b>NYC · MIA</b>
@@ -219,6 +167,48 @@ const FAQS = [
       </div>
     </section>
 
+    {/* ── Live Calendly scheduler ── */}
+    <section class="cx-main">
+      <div class="wrap">
+        <div class="cx-sched" id="schedule">
+          <header class="cx-sched-head">
+            <div class="lhs">
+              <span class="eyebrow">Discovery Call</span>
+              <h2 class="display h-md" style="margin:10px 0 6px;font-size:clamp(28px, 3.6vw, 44px)">
+                Book a <span class="it" style="color:var(--crimson-text)">discovery</span> call.
+              </h2>
+              <p>30 minutes · Video call · No commitment · NYC &amp; Miami</p>
+            </div>
+            <div class="rhs">
+              <div class="cx-badge">
+                <span>30</span><small>MIN</small>
+              </div>
+            </div>
+          </header>
+
+          {/* Calendly scheduler — deferred (loads on view / click / #schedule
+              deep-link) to keep the initial page light and avoid eager
+              third-party cookies. Reserves its full height → no layout shift. */}
+          <div
+            class="cx-calendly"
+            data-embed-calendly
+            data-url={CALENDLY_URL}
+            style="height:700px"
+          >
+            <button type="button" class="cx-embed-cta" data-embed-trigger>
+              <span class="cx-embed-cta-main">Load the scheduler</span>
+              <span class="cx-embed-cta-sub">Calendly · 30-minute call</span>
+            </button>
+          </div>
+
+          <footer class="cx-sched-foot">
+            <span>Pick any time that works, the call is with Hector or Fabio.</span>
+            <span class="pwby">Powered by <b>Calendly</b></span>
+          </footer>
+        </div>
+      </div>
+    </section>
+
     {/* ── Below-scheduler trust row ── */}
     <section class="cx-trust">
       <div class="wrap">
@@ -226,7 +216,7 @@ const FAQS = [
           <div class="cx-trust-card">
             <span class="cx-trust-icon">·</span>
             <div>
-              <div class="title">Reply within 2 business days</div>
+              <div class="title">A personal reply</div>
               <p>
                 Every inquiry is read and answered personally by Fabio, Hector,
                 or a member of the WOA team. No autoreplies.
@@ -308,7 +298,6 @@ const FAQS = [
               Fort Lauderdale · Palm Beach (select dates).
             </p>
             <div class="meta">
-              <div><b>2026</b>Expansion</div>
               <div><b>Wynwood</b>Local HQ</div>
             </div>
           </div>

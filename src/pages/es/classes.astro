@@ -1,4 +1,5 @@
 ---
+import { replyTime } from '../../i18n/house';
 import Layout from '../../layouts/Layout.astro';
 import Pic from '../../components/Pic.astro';
 import classHero from '../../assets/img/class-hero.webp';
@@ -209,11 +210,10 @@ const C_FAQ = [
           Reserve su <span class="it" style="color:var(--crimson-text)">clase</span>.
         </h2>
         <p>
-          Llamada de exploración de 30 minutos. Definiremos el formato, el menú y la fecha, y
-          tendrá una propuesta personalizada en su bandeja de entrada en dos días hábiles.
+          Cuéntenos qué está planeando y le ayudaremos a definir la clase, el menú y la fecha. {replyTime.es}
         </p>
         <div class="cta-row">
-          <a href="/es/contact" class="btn btn-solid">Reserve una llamada de exploración <span class="arr">→</span></a>
+          <a href="/es/contact#inquiry-form" class="btn btn-solid">Solicite una cotización</a>
           <a href="/es/contact" class="btn btn-ghost">Todas las formas de contactarnos</a>
         </div>
       </div>

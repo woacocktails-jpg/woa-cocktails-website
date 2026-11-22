@@ -1,4 +1,5 @@
 ---
+import { replyTime, bookingMinimum } from '../../i18n/house';
 import Layout from '../../layouts/Layout.astro';
 import Pic from '../../components/Pic.astro';
 import mbHeroPuma from '../../assets/img/mb-hero-puma.webp';
@@ -34,7 +35,7 @@ const IDEAL = [
 // ── Chapter 05 — Process ──
 const STEPS = [
   { n: '01', t: 'Llamada de descubrimiento', d: 'Una consulta de 30 minutos: fecha, visión, mercado y alcance. Sin presión.' },
-  { n: '02', t: 'Propuesta a la medida', d: 'En un plazo de dos días hábiles: diseño de la barra, opciones de personal, dirección del menú y cotización todo incluido.' },
+  { n: '02', t: 'Propuesta a la medida', d: 'Diseño de la barra, opciones de personal, dirección del menú y cotización todo incluido.' },
   { n: '03', t: 'Menú y montaje', d: 'Degustación (opcional). Cócteles de autor finalizados. Diseño y estilo de la barra confirmados.' },
   { n: '04', t: 'Día del evento', d: 'Llegamos temprano. Montamos, atendemos, desmontamos y nos vamos sin dejar rastro. Tú sigues siendo un invitado en tu propio evento.' },
 ];
@@ -42,7 +43,7 @@ const STEPS = [
 // ── FAQ ──
 const MB_FAQ = [
   { q: '¿Cómo se estructura el precio?',
-    a: 'Cada evento se cotiza a la medida: hay demasiadas variables (número de invitados, horas, mercado, diseño de la barra, complejidad del menú, personal) para que una tarifa fija sea honesta. Después de una llamada de descubrimiento de 30 minutos, enviamos una propuesta completa en un plazo de dos días hábiles.' },
+    a: 'Cada evento se cotiza a la medida: hay demasiadas variables (número de invitados, horas, mercado, diseño de la barra, complejidad del menú, personal) para que una tarifa fija sea honesta. Una vez revisados los detalles de su evento, prepararemos una propuesta completa.' },
   { q: '¿WOA Cocktails provee el alcohol?',
     a: 'WOA Cocktails coordina y cura la experiencia de bebidas completa. Podemos ayudar con la planificación del menú, listas de compras, cantidades, mixers, garnishes y todos los detalles relacionados con las bebidas para garantizar un servicio impecable.' },
   { q: '¿Pueden adaptar el montaje al tema o la estética de mi evento?',
@@ -50,7 +51,7 @@ const MB_FAQ = [
   { q: '¿Qué incluye la barra móvil de lujo?',
     a: 'El montaje completo de la barra: front bar y back bar, cristalería, pozo de hielo, estación de garnishes y señalización si aplica. Nuestras barras vienen en varios tamaños; especificamos el tamaño adecuado para tu espacio y número de invitados.' },
   { q: '¿A cuántos invitados puede atender WOA?',
-    a: 'Los paquetes parten de un mínimo de 20 invitados y escalan a eventos de más de 500. El personal y la cantidad de barras escalan con el número de invitados para mantener un estándar de servicio de menos de 3 minutos en los momentos pico.' },
+    a: bookingMinimum.es },
   { q: '¿Pueden crear un cóctel de autor para nuestro evento?',
     a: 'Sí, el desarrollo de cócteles de autor personalizados está disponible como complemento si lo necesitas. Podemos crearlo en torno a un tema, una paleta de colores, un nombre o incluso un invitado de honor.' },
 ];
@@ -358,11 +359,10 @@ const MB_FAQ = [
           Construyamos <span class="it" style="color:var(--crimson-text)">tu</span> barra.
         </h2>
         <p>
-          Llamada de descubrimiento de 30 minutos. Escuchamos, compartimos ideas y tendrás
-          una propuesta a la medida en tu bandeja de entrada en un plazo de dos días hábiles.
+          Cuéntenos sobre su evento y prepararemos una propuesta para su barra. {replyTime.es}
         </p>
         <div class="cta-row">
-          <a href="/es/contact" class="btn btn-solid">Reserve una llamada de descubrimiento <span class="arr">→</span></a>
+          <a href="/es/contact#inquiry-form" class="btn btn-solid">Solicite una cotización</a>
           <a href="/es/contact" class="btn btn-ghost">Todas las formas de contactarnos</a>
         </div>
       </div>

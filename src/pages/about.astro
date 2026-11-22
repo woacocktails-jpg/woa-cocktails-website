@@ -9,6 +9,8 @@ import cityMiami from '../assets/img/city-miami.jpeg';
 import founderHector from '../assets/img/founder-hector.jpg';
 import mbRooftopBlack from '../assets/img/mb-rooftop-black.jpg';
 
+import { founderBios, houseStats } from '../i18n/house';
+
 // ── Card data ────────────────────────────────────────────────────────
 const CARDS = [
   {
@@ -18,7 +20,7 @@ const CARDS = [
     back: {
       eyebrow: 'Co-Founder',
       title: 'Fabio Perez.',
-      body: 'A hospitality professional with years in NYC luxury restaurants and beverage operations. Fabio leads guest experience, hospitality standards, and the WOA team philosophy: every pour is a posture.',
+      body: founderBios.en.fabio,
     },
   },
   {
@@ -28,7 +30,7 @@ const CARDS = [
     back: {
       eyebrow: 'Co-Founder',
       title: 'Hector Taveras.',
-      body: 'A beverage director and event execution lead with deep experience in restaurant leadership. Hector drives menu architecture, cocktail development, and the craft side of every WOA experience.',
+      body: founderBios.en.hector,
     },
   },
   {
@@ -38,7 +40,7 @@ const CARDS = [
     back: {
       eyebrow: 'The Founders',
       title: 'Fabio & Hector.',
-      body: 'Longtime friends and hospitality professionals who founded WOA in 2020 during the pandemic. What started as cocktail content on social became a full hospitality house, now operating across New York and Miami.',
+      body: 'Longtime friends and hospitality professionals who founded WOA in 2020 during the pandemic. What started as cocktail content on social became a full hospitality house, serving New York and Miami.',
     },
   },
   {
@@ -58,7 +60,7 @@ const CARDS = [
     back: {
       eyebrow: 'Market 02',
       title: 'Dade County.',
-      body: 'Now serving Miami, Miami Beach, Brickell, Coral Gables, Bal Harbour and Fort Lauderdale. Rooftops, estates and brand activations: the same WOA standard, in a new climate.',
+      body: 'WOA serves Miami, Miami Beach, Brickell, Coral Gables, Bal Harbour and Fort Lauderdale, from rooftop weddings to brand activations.',
     },
   },
   {
@@ -74,10 +76,10 @@ const CARDS = [
   {
     id: 'events',
     kind: 'text',
-    front: { lg: '500+', sm: 'Events curated' },
+    front: { lg: houseStats.en.events.b, sm: houseStats.en.events.label },
     back: {
       eyebrow: 'Scale',
-      title: '500+ events.',
+      title: `${houseStats.en.events.b} events.`,
       body: 'Weddings, corporate activations, brand launches, rooftop parties, intimate dinners. Every one custom-built to the moment: never a template, never a copy.',
     },
   },
