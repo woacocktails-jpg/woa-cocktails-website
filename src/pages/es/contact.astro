@@ -3,6 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import Pic from '../../components/Pic.astro';
 import foundersCheers from '../../assets/img/founders-cheers.jpg';
 
+import { bookingMinimum, houseStats, replyTime } from '../../i18n/house';
+
 // Live Calendly scheduler URL (dark-themed via params).
 const CALENDLY_URL = "https://calendly.com/woacocktails/30min?hide_gdpr_banner=1&background_color=0b0907&text_color=ebe3d2&primary_color=c5302d";
 
@@ -13,7 +15,7 @@ const TALLY_SRC = "https://tally.so/embed/2ERkDj?alignLeft=1&hideTitle=1&transpa
 const FAQS = [
   {
     q: "¿Cuál es el mínimo para reservar un evento?",
-    a: "Nuestros paquetes comienzan con 20 invitados y un mínimo de 3 horas de servicio completo de bebidas.",
+    a: bookingMinimum.es,
   },
   {
     q: "¿Con cuánta anticipación debo comunicarme para un evento?",
@@ -67,26 +69,14 @@ const FAQS = [
               Creemos <span class="it" style="color:var(--crimson-text)">algo</span><br />inolvidable.
             </h1>
             <p>
-              Reserve una llamada de descubrimiento con WOA. Escucharemos, compartiremos ideas
-              y le enviaremos una propuesta a la medida en un plazo de dos días hábiles.
+              Cuéntenos sobre su evento y le responderemos personalmente. {replyTime.es}
             </p>
             <div class="cx-meta">
-              <div>
-                <span class="stat-lg">2 días</span>
-                de respuesta
-              </div>
-              <div>
-                <span class="stat-lg">500+</span>
-                Eventos producidos
-              </div>
-              <div>
-                <span class="stat-lg">5★</span>
-                Calificación promedio
-              </div>
+              {Object.values(houseStats.es).map((stat) => (
+                <div><span class="stat-lg">{stat.b}</span>{stat.label}</div>
+              ))}
             </div>
-            <a href="#schedule" class="btn btn-solid cx-hero-cta">
-              Ir al programador <span class="arr">↓</span>
-            </a>
+            <a href="#inquiry-form" class="btn btn-solid cx-hero-cta">Solicite una cotización</a>
           </div>
           <figure class="cx-hero-photo">
             <Pic src={foundersCheers} alt="Los cofundadores de WOA, Fabio Perez y Hector Taveras, compartiendo una risa y un brindis en la barra" kind="half" priority />
@@ -99,57 +89,15 @@ const FAQS = [
       </div>
     </section>
 
-    {/* ── Live Calendly scheduler ── */}
-    <section class="cx-main">
-      <div class="wrap">
-        <div class="cx-sched" id="schedule">
-          <header class="cx-sched-head">
-            <div class="lhs">
-              <span class="eyebrow">Llamada de descubrimiento</span>
-              <h2 class="display h-md" style="margin:10px 0 6px;font-size:clamp(28px, 3.6vw, 44px)">
-                Reserve una llamada de <span class="it" style="color:var(--crimson-text)">descubrimiento</span>.
-              </h2>
-              <p>30 minutos · Videollamada · Sin compromiso · Nueva York y Miami</p>
-            </div>
-            <div class="rhs">
-              <div class="cx-badge">
-                <span>30</span><small>MIN</small>
-              </div>
-            </div>
-          </header>
-
-          {/* Calendly scheduler — deferred (loads on view / click / #schedule
-              deep-link) to keep the initial page light and avoid eager
-              third-party cookies. Reserves its full height → no layout shift. */}
-          <div
-            class="cx-calendly"
-            data-embed-calendly
-            data-url={CALENDLY_URL}
-            style="min-width:320px;height:700px"
-          >
-            <button type="button" class="cx-embed-cta" data-embed-trigger>
-              <span class="cx-embed-cta-main">Cargar el programador</span>
-              <span class="cx-embed-cta-sub">Calendly · llamada de 30 minutos</span>
-            </button>
-          </div>
-
-          <footer class="cx-sched-foot">
-            <span>Elija el horario que le convenga, la llamada es con Hector o Fabio.</span>
-            <span class="pwby">Con tecnología de <b>Calendly</b></span>
-          </footer>
-        </div>
-      </div>
-    </section>
-
     {/* ── Inquiry form — live Tally embed ── */}
     <section class="cx-form-sec" id="inquiry-form">
       <div class="wrap">
         <div class="cx-form-head">
-          <span class="eyebrow">O sáltese la llamada</span>
+          <span class="eyebrow">Consulta para su evento</span>
           <h2 class="display h-md" style="margin-top:14px">
-            ¿Ya sabe exactamente <span class="it" style="color:var(--crimson-text)">lo que necesita?</span>
+            Solicite una <span class="it" style="color:var(--crimson-text)">cotización.</span>
           </h2>
-          <p>Envíe los detalles y volveremos con ideas y una cotización a la medida.</p>
+          <p>Envíe los detalles y volveremos con ideas y una cotización a la medida. Aceptamos tarjetas de crédito, Apple Pay y transferencias ACH.</p>
         </div>
 
         <div class="cx-form-layout">
@@ -180,14 +128,14 @@ const FAQS = [
                   <span class="cx-step-n">01</span>
                   <div>
                     <b>Lo leemos nosotros mismos</b>
-                    <p>Cada solicitud llega directamente a Hector y Fabio: sin bandeja de entrada, sin intermediarios.</p>
+                    <p>Fabio, Hector o un miembro del equipo de WOA lee personalmente su solicitud.</p>
                   </div>
                 </li>
                 <li>
                   <span class="cx-step-n">02</span>
                   <div>
-                    <b>Tendrá respuesta en un plazo de 2 días hábiles</b>
-                    <p>Con las primeras ideas, la disponibilidad y una cotización a la medida de su evento.</p>
+                    <b>Le respondemos personalmente</b>
+                    <p>{replyTime.es}</p>
                   </div>
                 </li>
                 <li>
@@ -202,8 +150,8 @@ const FAQS = [
 
             <div class="cx-aside-foot">
               <div class="cx-aside-stat">
-                <b>≤ 2 días</b>
-                <span>Tiempo de respuesta típico</span>
+                <b>30 min</b>
+                <span>Respuesta habitual en horario comercial</span>
               </div>
               <div class="cx-aside-stat">
                 <b>NYC · MIA</b>
@@ -220,6 +168,48 @@ const FAQS = [
       </div>
     </section>
 
+    {/* ── Live Calendly scheduler ── */}
+    <section class="cx-main">
+      <div class="wrap">
+        <div class="cx-sched" id="schedule">
+          <header class="cx-sched-head">
+            <div class="lhs">
+              <span class="eyebrow">Llamada de descubrimiento</span>
+              <h2 class="display h-md" style="margin:10px 0 6px;font-size:clamp(28px, 3.6vw, 44px)">
+                Reserve una llamada de <span class="it" style="color:var(--crimson-text)">descubrimiento</span>.
+              </h2>
+              <p>30 minutos · Videollamada · Sin compromiso · Nueva York y Miami</p>
+            </div>
+            <div class="rhs">
+              <div class="cx-badge">
+                <span>30</span><small>MIN</small>
+              </div>
+            </div>
+          </header>
+
+          {/* Calendly scheduler — deferred (loads on view / click / #schedule
+              deep-link) to keep the initial page light and avoid eager
+              third-party cookies. Reserves its full height → no layout shift. */}
+          <div
+            class="cx-calendly"
+            data-embed-calendly
+            data-url={CALENDLY_URL}
+            style="height:700px"
+          >
+            <button type="button" class="cx-embed-cta" data-embed-trigger>
+              <span class="cx-embed-cta-main">Cargar el programador</span>
+              <span class="cx-embed-cta-sub">Calendly · llamada de 30 minutos</span>
+            </button>
+          </div>
+
+          <footer class="cx-sched-foot">
+            <span>Elija el horario que le convenga, la llamada es con Hector o Fabio.</span>
+            <span class="pwby">Con tecnología de <b>Calendly</b></span>
+          </footer>
+        </div>
+      </div>
+    </section>
+
     {/* ── Below-scheduler trust row ── */}
     <section class="cx-trust">
       <div class="wrap">
@@ -227,7 +217,7 @@ const FAQS = [
           <div class="cx-trust-card">
             <span class="cx-trust-icon">·</span>
             <div>
-              <div class="title">Respuesta en un plazo de 2 días hábiles</div>
+              <div class="title">Una respuesta personal</div>
               <p>
                 Cada solicitud es leída y respondida personalmente por Fabio, Hector
                 o un miembro del equipo de WOA. Sin respuestas automáticas.
@@ -309,7 +299,6 @@ const FAQS = [
               Fort Lauderdale · Palm Beach (fechas selectas).
             </p>
             <div class="meta">
-              <div><b>2026</b>Expansión</div>
               <div><b>Wynwood</b>Sede local</div>
             </div>
           </div>

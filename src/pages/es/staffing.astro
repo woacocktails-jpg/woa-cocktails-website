@@ -1,4 +1,5 @@
 ---
+import { replyTime } from '../../i18n/house';
 import Layout from '../../layouts/Layout.astro';
 import Pic from '../../components/Pic.astro';
 import teamFabioHector from '../../assets/img/team-fabio-hector.webp';
@@ -60,7 +61,7 @@ const ROLES = [
 // ── How it works ─────────────────────────────────────────────────────
 const ST_STEPS = [
   { n: '01', t: 'Llamada de descubrimiento', d: '30 minutos: fecha, número de invitados, estilo del evento, alcance. Evaluamos la afinidad y las necesidades de personal.' },
-  { n: '02', t: 'Equipo a la medida', d: 'En dos días hábiles: composición de equipo propuesta, proporciones, líder y cotización todo incluido.' },
+  { n: '02', t: 'Equipo a la medida', d: 'Composición de equipo propuesta, proporciones, líder y cotización todo incluido.' },
   { n: '03', t: 'Briefing previo al evento', d: 'El capitán se reúne con el anfitrión y recorre el lugar. Se alinean tiempos, run-of-show y contingencias.' },
   { n: '04', t: 'Día del evento', d: 'El equipo llega uniformado e informado. Nosotros somos los anfitriones. Usted disfruta su propio evento.' },
 ];
@@ -294,11 +295,10 @@ const ST_FAQ = [
           Dote de personal su <span class="it" style="color:var(--crimson-text)">próximo</span> evento.
         </h2>
         <p>
-          Llamada de descubrimiento de 30 minutos. Evaluaremos el brief, propondremos la
-          forma de equipo adecuada y enviaremos una cotización en dos días hábiles.
+          Cuéntenos sobre su evento y le recomendaremos un equipo para el servicio. {replyTime.es}
         </p>
         <div class="cta-row">
-          <a href="/es/contact" class="btn btn-solid">Reserve una llamada de descubrimiento <span class="arr">→</span></a>
+          <a href="/es/contact#inquiry-form" class="btn btn-solid">Solicite una cotización</a>
           <a href="/es/contact" class="btn btn-ghost">Todas las formas de contactarnos</a>
         </div>
       </div>

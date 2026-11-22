@@ -1,4 +1,5 @@
 ---
+import { replyTime } from '../i18n/house';
 import Layout from '../layouts/Layout.astro';
 import Pic from '../components/Pic.astro';
 import bxTakeoverCrew from '../assets/img/bx-takeover-crew.jpg';
@@ -46,7 +47,7 @@ const BX_FORMATS = [
 // ── PROCESS (covers both services) ───────────────────────────────────
 const BX_STEPS = [
   { n: '01', t: 'Discovery call', d: "30 minutes. Whether it's a one-night takeover or a full bar program, we start with the brief." },
-  { n: '02', t: 'Proposal & scope', d: 'Within two business days: concept direction, scope, timeline and an all-in quote.' },
+  { n: '02', t: 'Proposal & scope', d: 'Concept direction, scope, timeline and an all-in quote.' },
   { n: '03', t: 'Design & build', d: 'Menu, staffing and run-of-show for takeovers; design, training and documentation for consulting.' },
   { n: '04', t: 'Execution', d: 'We run the night, or stand up the program and train your team to own it.' },
 ];
@@ -342,11 +343,10 @@ const BX_FAQ = [
           Take over a <span class="it" style="color:var(--crimson-text)">room</span>, <br />or build your own.
         </h2>
         <p>
-          30-minute discovery call. Tell us whether it's a one-night takeover or a
-          full bar program. We'll send a tailored proposal within two business days.
+          Tell us whether you’re planning a one-night takeover or a full bar program. {replyTime.en}
         </p>
         <div class="cta-row">
-          <a href="/contact" class="btn btn-solid">Book a discovery call <span class="arr">→</span></a>
+          <a href="/contact#inquiry-form" class="btn btn-solid">Get a Quote</a>
           <a href="/contact" class="btn btn-ghost">All ways to reach us</a>
         </div>
       </div>
