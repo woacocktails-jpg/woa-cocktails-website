@@ -27,9 +27,12 @@ const AMOUNT = {
 
 export const NYC_RENTAL_PRICES = {
   fourFoot: '$275',
+  eightFootSoho: '$550',
+  eightFootLinea: '$450',
+  tenFoot: '$650',
   sixteenFoot: '$950',
+  champagne: '$300',
 } as const;
-
 /** Mixology classes book from this many participants. */
 export const CLASS_MIN = 12;
 
