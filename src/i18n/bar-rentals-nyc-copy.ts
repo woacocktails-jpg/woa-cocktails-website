@@ -88,11 +88,14 @@ export function nycBarRentalsCopy(lang: Lang): ReturnType<typeof barRentalsCopy>
       ...copy.get,
       title: 'Choose your ',
       titleIt: 'bar size.',
-      items: [
-        { n: '01', h: '4- and 5-foot bars', p: 'A compact option for tight floor plans, smaller receptions, or a welcome-drink station.' },
-        { n: '02', h: '7- and 8-foot bars', p: 'A main bar with more counter space for prep and service.' },
-        { n: '03', h: '12- and 16-foot bars', p: 'Ask about availability for larger receptions, corporate events, and setups with multiple service stations.' },
-      ],
+items: [
+  { n: '01', h: 'Pearl 16 ft — $950', p: 'Our largest bar, ideal for corporate events, weddings, and brand activations.' },
+  { n: '02', h: 'Pearl 10 ft — $650', p: 'A spacious, elegant bar for receptions and corporate events.' },
+  { n: '03', h: 'Linea 8 ft — $450', p: 'A modern bar with a clean, minimalist design.' },
+  { n: '04', h: 'Champagne — $300', p: 'An elegant bar for intimate celebrations and champagne service.' },
+  { n: '05', h: 'Soho 8 ft — $550', p: 'A stylish bar offering generous counter space for events.' },
+  { n: '06', h: 'Soho 4 ft — $275', p: 'A compact, sophisticated bar for smaller gatherings.' },
+],
     },
     ideal: { ...copy.ideal, note: 'Book the bar on its own if your venue already has a team, or add WOA bartenders to the same quote.' },
     how: {
