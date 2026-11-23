@@ -1,0 +1,44 @@
+---
+import heroPour from '../assets/img/hero-pour.jpg';
+const { lang = 'en' } = Astro.props as { lang?: 'en' | 'es' };
+const es = lang === 'es';
+const article = 'https://peopleenespanol.com/zuleika-viera-lanza-su-comunidad-viera-babes-inspirate-looks-de-verano-11766304';
+---
+<section class="press-feature" id="press" aria-labelledby="press-heading">
+  <div class="wrap">
+    <div class="press-top">
+      <span class="eyebrow">{es ? 'EN LA PRENSA' : 'IN THE PRESS'}</span>
+      <h2 class="display h-lg" id="press-heading">{es ? 'Un momento para compartir.' : 'A moment worth sharing.'}</h2>
+    </div>
+    <div class="press-grid">
+      <div class="press-photo">
+        <img src="/images/press-viera.jpg" alt={es ? 'Experiencia de coctelería de WOA Cocktails en un evento' : 'WOA Cocktails bartender serving a guest at an event'} loading="lazy" decoding="async" onerror={`this.onerror=null;this.src='${heroPour.src}'`} />
+      </div>
+      <div class="press-copy">
+        <div class="press-brand">People <span>EN ESPAÑOL</span></div>
+        <h3 class="display">{'Zuleika Viera lanza su comunidad “Viera Babes”'}</h3>
+        <p>{es ? 'WOA Cocktails ofreció el servicio de coctelería durante el Tropi Glam After Party en Nueva York, evento mencionado en People en Español.' : 'WOA Cocktails provided cocktail service for the Tropi Glam After Party in New York, an event covered by People en Español.'}</p>
+        <a class="press-link" href={article} target="_blank" rel="noopener noreferrer">{es ? 'LEER EL ARTÍCULO' : 'READ THE FEATURE'} <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="press-bottom"><span>{es ? 'COBERTURA DEL EVENTO · JULIO 2025' : 'EVENT COVERAGE · JULY 2025'}</span></div>
+  </div>
+</section>
+<style>
+  .press-feature{background:#10100f;color:#eee8de;padding:clamp(72px,9vw,132px) 0 80px}
+  .press-top{text-align:center;margin-bottom:48px}
+  .press-top .eyebrow{letter-spacing:.28em;color:#c5ae80}
+  .press-top h2{margin:16px auto 0;max-width:22ch}
+  .press-grid{display:grid;grid-template-columns:1.06fr 1fr;gap:clamp(28px,5vw,80px);align-items:center}
+  .press-photo{aspect-ratio:1.35;overflow:hidden;background:#29251f}
+  .press-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .press-copy{border-top:1px solid #746044;padding-top:36px}
+  .press-brand{font-family:Georgia,serif;font-weight:bold;font-size:clamp(32px,5vw,60px);letter-spacing:-.06em;color:#df243e;line-height:1}
+  .press-brand span{font-family:Arial,sans-serif;letter-spacing:0;font-size:12px;color:white;background:#df243e;padding:5px 8px;vertical-align:middle;white-space:nowrap}
+  .press-copy h3{font-size:clamp(29px,3.6vw,52px);line-height:1.08;margin:32px 0 22px}
+  .press-copy p{color:#c8c1b7;line-height:1.75;font-size:16px;max-width:48ch}
+  .press-link{display:inline-flex;gap:18px;align-items:center;border:1px solid #bda474;padding:16px 22px;color:#eee8de;text-decoration:none;letter-spacing:.17em;font-size:12px;margin-top:28px}
+  .press-link:hover,.press-link:focus-visible{background:#bda474;color:#10100f}
+  .press-bottom{text-align:center;color:#c5ae80;font-size:11px;letter-spacing:.19em;margin-top:42px;padding-top:24px;border-top:1px solid #514536}
+  @media(max-width:760px){.press-grid{grid-template-columns:1fr}.press-copy{padding-top:28px}.press-photo{aspect-ratio:1.12}.press-feature{padding:68px 0 48px}}
+</style>
