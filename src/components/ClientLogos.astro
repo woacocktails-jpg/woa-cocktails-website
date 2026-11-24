@@ -7,7 +7,7 @@ const brands = [['Nike','nike'],['Adobe','adobe'],['Adidas','adidas'],['StockX',
   <div class="client-heading"><span class="eyebrow">{lang === 'es' ? 'NUESTRA COMUNIDAD' : 'OUR COMMUNITY'}</span><h2 id="client-strip-title">{lang === 'es' ? 'Clientes y colaboraciones destacadas' : 'Selected Clients & Collaborations'}</h2></div>
   <div class="logo-window">
     <div class="logo-track">
-      {[0,1].map(copy => <ul aria-hidden={copy === 1 ? 'true' : undefined} class:list={['logo-group', {duplicate: copy === 1}]}>{brands.map(([name, file]) => <li><img src={`/client-logos/${file}.webp`} alt={copy === 1 ? '' : name} width="196" height="94" loading="lazy" decoding="async" /></li>)}</ul>)}
+      {[0,1].map(copy => <ul aria-hidden={copy === 1 ? 'true' : undefined} class:list={['logo-group', {duplicate: copy === 1}]}>{brands.map(([name, file]) => <li><img src={`/client-logos/${file}.webp`} alt={copy === 1 ? '' : name} width="196" height="94" loading="eager" decoding="async" /></li>)}</ul>)}
     </div>
   </div>
   <button type="button" class="logo-toggle" aria-pressed="false" data-pause={lang === 'es' ? 'Pausar' : 'Pause'} data-play={lang === 'es' ? 'Reanudar' : 'Resume'}>{lang === 'es' ? 'Pausar' : 'Pause'}</button>
@@ -28,14 +28,14 @@ const brands = [['Nike','nike'],['Adobe','adobe'],['Adidas','adidas'],['StockX',
 .eyebrow { display:block; font-size:9px; letter-spacing:.23em; font-weight:500; color:#76674f; margin-bottom:8px; }
 h2 { font-family:Georgia, 'Times New Roman', serif; font-size:clamp(26px,3vw,38px); font-weight:400; letter-spacing:-.025em; line-height:1.15; margin:0; }
 .logo-window { overflow:hidden; max-width:1440px; margin:auto; mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent); }
-.logo-track { display:flex; width:max-content; animation:client-scroll 76s linear infinite; }
-.logo-group { display:flex; flex:none; list-style:none; padding:0; margin:0; }
-li { width:240px; height:100px; display:flex; align-items:center; justify-content:center; }
-img { width:196px; height:94px; object-fit:contain; filter:none !important; opacity:1 !important; mix-blend-mode:normal; }
+.logo-track { display:flex; width:max-content; gap:0; padding:0; margin:0; animation:client-scroll 76s linear infinite; }
+.logo-group { display:flex; flex:0 0 auto; gap:0; list-style:none; padding:0; margin:0; }
+li { flex:0 0 240px; margin:0; padding:0; width:240px; height:100px; display:flex; align-items:center; justify-content:center; }
+img { width:196px; height:94px; object-fit:contain; filter:none !important; opacity:1 !important; mix-blend-mode:multiply; }
 .logo-toggle { display:block; margin:10px auto 0; padding:4px 12px; border:0; background:transparent; color:#655d50; font-size:10px; letter-spacing:.08em; cursor:pointer; }
 .logo-toggle:focus-visible { outline:1px solid currentColor; outline-offset:2px; }
 .paused .logo-track, .logo-window:hover .logo-track { animation-play-state:paused; }
 @keyframes client-scroll { to { transform:translateX(-50%); } }
-@media(max-width:600px) { .client-strip { padding:36px 0 24px; } .client-heading { margin-bottom:16px; } li { width:176px; height:80px; } img { width:148px; height:76px; } }
+@media(max-width:600px) { .client-strip { padding:36px 0 24px; } .client-heading { margin-bottom:16px; } li { flex-basis:176px; width:176px; height:80px; } img { width:148px; height:76px; } }
 @media(prefers-reduced-motion:reduce) { .logo-track { animation:none; } .logo-window { overflow-x:auto; mask-image:none; } .duplicate,.logo-toggle { display:none; } }
 </style>
